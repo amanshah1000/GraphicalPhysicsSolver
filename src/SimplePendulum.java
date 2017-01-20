@@ -11,7 +11,7 @@ import java.awt.Graphics;
 
 import javax.swing.JComponent;
 
-public class SimplePendulum extends JComponent 
+public class SimplePendulum extends UpdatableComponent
 {
 	
 	private double alpha;
