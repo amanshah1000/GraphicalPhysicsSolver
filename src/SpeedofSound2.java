@@ -31,7 +31,7 @@ import javax.swing.*;
 
 
 
-public class PhysicsProgram extends JFrame
+public class SpeedofSound extends JFrame
 
 {
 
@@ -53,8 +53,6 @@ private JPanel mainPanel;
 
 private JPanel SpeedOfSoundPanel;
 
-private JFormattedTextField tempField;
-
 //panels for the pendulum simulation
 
 RunablePanel pendulumPanel;
@@ -72,7 +70,6 @@ private boolean isRunning;
 private SimplePendulum pendulum;
 
 private PysicsEquations Eq;
-private SpeedofSoundEq Speed;
 
 
     
@@ -217,129 +214,6 @@ private SpeedofSoundEq Speed;
         //starts the tread in the main panel
 
         Thread simulationThread = new Thread(pendulumPanel);
-
-        simulationThread.start();
-
-        
-
-    }
-
-    
- public void initSpeedofSoundPanel(double temperature, double velocity)
-
-    {
-
-        //defines screen variables
-
-         screenWidth = 800;
-
-          screenHeight = 600;
-
-          
-
-        
-
-        //defines panels
-
-        //mainPanel = new JPanel();
-
-         SpeedofSoundPanel=new RunablePanel();
-
-        lowerPanel= new ClickablePanel();
-
-        simulationPanel= new RunablePanel();
-
-        SpeedofSoundPanel.setLayout(new BorderLayout());
-
-        SpeedofSoundPanel.add(lowerPanel,BorderLayout.SOUTH);
-
-        SpeedofSoundPanel.add(simulationPanel,BorderLayout.CENTER);
-
-        
-
-        
-
-        //defines buttons
-
-        calc  = new JButton("Calculate");
-
-        clear = new JButton("Clear");
-
-        
-
-        //defines text fields
-
-        tempField = new JFormattedTextField(thetaFormat);
-
-        tempField.setValue(0);
-
-        tempField.setColumns(4);
-
-        
-
-       
-
-       
-
-        
-
-        //adds buttons to the panel
-
-        lowerPanel.add(calc);
-
-        lowerPanel.add(clear);
-
-        lowerPanel.add(tempField);
-
-       
-
-        
-
-        //add actionliseners to buttons on a clickable panel
-
-        tempField.addPropertyChangeListener("Temperature",lowerPanel);
-
-        
-
-        calc.addActionListener(lowerPanel);
-
-        clear.addActionListener(lowerPanel);
-
-        
-
-        
-
-        
-
-        //intitalizes the equation conversions/solver
-
-        Eq=new PysicsEquations();
-
-        
-
-        
-
-        //set other variables
-
-        isRunning=false;
-
-        speedOfSound =new SpeedOfSoundEq(0,0);
-
-        //simulationPanel.add(pendulum);
-
-        SpeedOfSoundPanel.add(pendulum);
-
-        speedOfSound.repaint();
-
-        //simulationPanel.repaint();
-
-        SpeedOfSoundPanel.repaint();
-
-        
-
-        //starts the tread in the main panel
-
-        Thread simulationThread = new Thread(SpeedOfSoundPanel);
 
         simulationThread.start();
 
