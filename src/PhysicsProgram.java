@@ -51,7 +51,7 @@ private NumberFormat lengthFormat;
 
 private JPanel mainPanel;
 
-private JPanel SpeedOfSoundPanel;
+private RunablePanel SpeedOfSoundPanel;
 
 private JFormattedTextField tempField;
 
@@ -72,7 +72,12 @@ private boolean isRunning;
 private SimplePendulum pendulum;
 
 private PysicsEquations Eq;
+
 private SpeedofSoundEq Speed;
+
+private JButton calc;
+
+private JButton clear;
 
 
     
@@ -231,9 +236,9 @@ private SpeedofSoundEq Speed;
 
         //defines screen variables
 
-         screenWidth = 800;
+        	screenWidth = 800;
 
-          screenHeight = 600;
+          	screenHeight = 600;
 
           
 
@@ -243,17 +248,17 @@ private SpeedofSoundEq Speed;
 
         //mainPanel = new JPanel();
 
-         SpeedofSoundPanel=new RunablePanel();
+        SpeedOfSoundPanel=new RunablePanel();
 
         lowerPanel= new ClickablePanel();
 
         simulationPanel= new RunablePanel();
 
-        SpeedofSoundPanel.setLayout(new BorderLayout());
+        SpeedOfSoundPanel.setLayout(new BorderLayout());
 
-        SpeedofSoundPanel.add(lowerPanel,BorderLayout.SOUTH);
+        SpeedOfSoundPanel.add(lowerPanel,BorderLayout.SOUTH);
 
-        SpeedofSoundPanel.add(simulationPanel,BorderLayout.CENTER);
+        SpeedOfSoundPanel.add(simulationPanel,BorderLayout.CENTER);
 
         
 
@@ -321,19 +326,15 @@ private SpeedofSoundEq Speed;
 
         //set other variables
 
-        isRunning=false;
-
-        speedOfSound =new SpeedOfSoundEq(0,0);
-
         //simulationPanel.add(pendulum);
 
-        SpeedOfSoundPanel.add(pendulum);
+       // SpeedOfSoundPanel.add(pendulum);
 
-        speedOfSound.repaint();
+        
 
         //simulationPanel.repaint();
 
-        SpeedOfSoundPanel.repaint();
+        
 
         
 
@@ -371,7 +372,7 @@ private SpeedofSoundEq Speed;
 
         mainPanel=new JPanel();
 
-        SpeedOfSoundPanel=new JPanel();
+        SpeedOfSoundPanel=new RunablePanel();
 
         mainPanel.setLayout(new BorderLayout());
 
@@ -466,6 +467,28 @@ public class ClickablePanel extends JPanel implements ActionListener,PropertyCha
             System.out.println("Start clicked");
 
             isRunning=true;
+
+            //mainPanel.run();
+
+        }
+         else if(source==calc)
+
+        {
+
+            System.out.println("calc clicked");
+
+            
+
+            //mainPanel.run();
+
+        }
+         else if(source==clear)
+
+        {
+
+            System.out.println("clear clicked");
+
+         //   isRunning=true;
 
             //mainPanel.run();
 
