@@ -12,6 +12,7 @@ import java.awt.event.ActionListener;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.text.NumberFormat;
+import java.util.ArrayList;
 
 
 import javax.swing.*;
@@ -31,12 +32,14 @@ private RunnablePanel speedOfSoundPanel;
 //panels for the pendulum simulation
 private RunnablePanel pendulumPanel;
 private ClickablePanel lowerPanel;//clickable panel is defined in the bottom of this class
-private RunnablePanel simulationPanel;//runnable panel is defined in the bottom of this class
+//private RunnablePanel simulationPanel;//runnable panel is defined in the bottom of this class
 private int screenWidth;
 private int screenHeight;
 private boolean isRunning;
+private UpdatableComponent soundComponent;
 private SimplePendulum pendulum;
-private PysicsEquations Eq;
+//private ArrayList<UpdatableComponent> pendulumComponents;
+private PhysicsEquations Eq;
 //private SpeedofSoundEq Speed;
 private JButton calc;
 private JButton clear;
@@ -63,8 +66,8 @@ private JFormattedTextField tempField;
         //defines panels
 
         //mainPanel = new JPanel();
-
-        speedOfSoundPanel=new RunnablePanel();
+        soundComponent=new UpdatableComponent();
+        speedOfSoundPanel=new RunnablePanel(soundComponent);
 
         lowerPanel= new ClickablePanel();
 
@@ -75,11 +78,6 @@ private JFormattedTextField tempField;
         speedOfSoundPanel.add(lowerPanel,BorderLayout.SOUTH);
 
         //speedOfSoundPanel.add(simulationPanel,BorderLayout.CENTER);
-
-
-
-
-
         //defines buttons
 
         calc  = new JButton("Calculate");
@@ -95,14 +93,6 @@ private JFormattedTextField tempField;
         tempField.setValue(0);
 
         tempField.setColumns(4);
-
-
-
-
-
-
-
-
 
         //adds buttons to the panel
 
@@ -142,7 +132,9 @@ private JFormattedTextField tempField;
 		
 		//defines panels
 		//mainPanel = new JPanel();
-	  	pendulumPanel=new RunnablePanel();
+		//adds the pendulum to he array list
+        pendulum = new SimplePendulum(100,Eq.degreesToRadian(90));
+	  	pendulumPanel=new RunnablePanel(pendulum);
 		lowerPanel= new ClickablePanel();
 		//simulationPanel= new RunablePanel();
 		pendulumPanel.setLayout(new BorderLayout());
@@ -178,12 +170,11 @@ private JFormattedTextField tempField;
 		
 		
 	    //intitalizes the equation conversions/solver
-	    Eq=new PysicsEquations();
+
 	    
 	    
 	    //set other variables
 	    isRunning=false;
-	    pendulum=new SimplePendulum(100,Eq.degreesToRadian(160));
 	    //simulationPanel.add(pendulum);
 	    pendulumPanel.add(pendulum);
 	    pendulum.repaint();
@@ -202,6 +193,7 @@ private JFormattedTextField tempField;
         screenWidth = 800;
         screenHeight = 600;
 
+        Eq=new PhysicsEquations();
         //initpendulum adds the buttons to the panels
 		initPendulumPanel(90,100);
 		initSpeedofSoundPanel(60,1000);
@@ -254,6 +246,7 @@ public class ClickablePanel extends JPanel implements ActionListener,PropertyCha
 		if(source==stop)
 		{
 		    isRunning=false;
+			pendulumPanel.setRunning(false);
 			System.out.println("Stop clicked");
 			//mainPanel.run();
 		}
@@ -262,6 +255,7 @@ public class ClickablePanel extends JPanel implements ActionListener,PropertyCha
 		{
 			System.out.println("Start clicked");
 			isRunning=true;
+			pendulumPanel.setRunning(true);
 			//mainPanel.run();
 		}
 	}
@@ -277,8 +271,8 @@ public class ClickablePanel extends JPanel implements ActionListener,PropertyCha
 /*
  * definition and instantiation of RunnablePanel
  */
-
-public class RunnablePanel extends JPanel implements Runnable
+/*
+public class RunablePanel extends JPanel implements Runnable
 {
 
 
@@ -301,7 +295,7 @@ public class RunnablePanel extends JPanel implements Runnable
 	}
 
 }
-
+*/
 
 }
 

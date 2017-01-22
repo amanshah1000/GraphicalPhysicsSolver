@@ -7,7 +7,7 @@
  */
 
 
-public class PysicsEquations 
+public class PhysicsEquations
 {
 	
 	public double degreesToRadian(double degrees)
