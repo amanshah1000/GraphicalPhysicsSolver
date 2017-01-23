@@ -9,7 +9,7 @@ import java.text.NumberFormat;
 /**
  * Created by markmcconachie on 1/21/17.
  */
-public class PendulumPanel extends JPanel
+public class PendulumPanel extends PhysicsPanel
 {
 
     private JButton start;
@@ -91,7 +91,7 @@ public class PendulumPanel extends JPanel
     }
 
 
-    private class ActionPanel extends JPanel implements ActionListener, PropertyChangeListener
+    public class ActionPanel extends JPanel implements ActionListener, PropertyChangeListener
     {
 
 

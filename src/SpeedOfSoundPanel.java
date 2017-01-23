@@ -7,9 +7,9 @@ import java.beans.PropertyChangeListener;
 import java.text.NumberFormat;
 
 /**
- * Created by markmcconachie on 1/21/17.
+ * Created by Aj Valenty
  */
-public class SpeedOfSoundPanel extends JPanel
+public class SpeedOfSoundPanel extends PhysicsPanel
 {
 
     private RunnablePanel speedOfSoundPanel;
@@ -97,30 +97,6 @@ public class SpeedOfSoundPanel extends JPanel
 
         this.setLayout(new BorderLayout());
         this.add(speedOfSoundPanel,BorderLayout.CENTER);
-
-
-
-    }
-
-
-    private class ActionPanel extends JPanel implements ActionListener, PropertyChangeListener
-    {
-
-
-        @Override
-        public void actionPerformed(ActionEvent event)
-        {
-
-            Object source = event.getSource();
-
-
-        }
-
-        @Override
-        public void propertyChange(PropertyChangeEvent evt)
-        {
-
-        }
 
     }
 
