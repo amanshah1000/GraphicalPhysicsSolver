@@ -34,9 +34,6 @@ public class RunnablePanel extends JPanel implements Runnable
                 //System.out.println(component);
                 component.update();
             }
-
-            //TODO add an updatable interface      .update();
-
             try
             {
                 Thread.sleep(15);

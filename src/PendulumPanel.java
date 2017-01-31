@@ -22,12 +22,16 @@ public class PendulumPanel extends PhysicsPanel
     private SimplePendulum pendulum;
     private ActionPanel lowerPanel;
     private PhysicsEquations Eq;
+    private double thetaLocal;
+    private double lengthLocal;
 
     public PendulumPanel(double theta, double length)
     {
         super();
         Eq= new PhysicsEquations();
-        init(Eq.degreesToRadian(theta),length);
+        thetaLocal=theta;
+        lengthLocal=length;
+        init(thetaLocal,lengthLocal);
 
 
     }
@@ -39,7 +43,7 @@ public class PendulumPanel extends PhysicsPanel
         //defines panels
         //mainPanel = new JPanel();
         //adds the pendulum to he array list
-        pendulum = new SimplePendulum(length, theta);
+        pendulum = new SimplePendulum(length, Eq.degreesToRadian(theta));
         pendulumPanel = new RunnablePanel(pendulum);
         lowerPanel= new ActionPanel();
         //simulationPanel= new RunablePanel();
@@ -54,11 +58,11 @@ public class PendulumPanel extends PhysicsPanel
 
         //defines text fields
         lengthField = new JFormattedTextField(thetaFormat);
-        lengthField.setValue(new Double(length));
+        lengthField.setValue(lengthLocal);
         lengthField.setColumns(4);
 
         thetaField = new JFormattedTextField(thetaFormat);
-        thetaField.setValue(new Double(theta));
+        thetaField.setValue(thetaLocal);
         thetaField.setColumns(4);
 
         //adds buttons to the panel
@@ -103,24 +107,40 @@ public class PendulumPanel extends PhysicsPanel
 
             if (source == stop)
             {
+                pendulum.setTheta(Eq.degreesToRadian((double)thetaField.getValue()));
 
+                //System.out.println((double)thetaField.getValue());
+
+                pendulum.setLength((double)lengthField.getValue());
+                pendulum.reset();
                 pendulumPanel.setRunning(false);
                 System.out.println("Stop clicked");
                 //mainPanel.run();
             } else if (source == start)
             {
+                pendulum.setTheta(Eq.degreesToRadian((double)thetaField.getValue()));
+                System.out.println((double)thetaField.getValue());
+                pendulum.setLength((double)lengthField.getValue());
+                pendulum.reset();
                 System.out.println("Start clicked");
-
                 pendulumPanel.setRunning(true);
                 //mainPanel.run();
             }
         }
 
         @Override
-        public void propertyChange(PropertyChangeEvent evt)
+        public void propertyChange(PropertyChangeEvent event)
         {
-
+            Object source = event.getSource();
+            if (source == thetaField)
+            {
+                thetaLocal = ((Number) thetaField.getValue()).doubleValue();
+                System.out.println("theta Changed");
+            }
+            else if (source == lengthField)
+            {
+                lengthLocal = ((Number) lengthField.getValue()).doubleValue();
+            }
         }
-
     }
 }
