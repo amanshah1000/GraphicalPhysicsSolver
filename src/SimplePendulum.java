@@ -26,9 +26,12 @@ public class SimplePendulum extends UpdatableComponent
 	{
 		this.theta=theta;
 		this.length=length;
-		alpha=(-9.81 / length * Math.sin(theta));
+		double meterLength=length/100;
+		alpha=(-9.81 / meterLength * Math.sin(theta));
+		//alpha =-9.81*Math.sin(theta);
 
-		deltaTime=0.1;
+		deltaTime=0.01;
+		//deltaTime=0.1;
 	}
 	
 	public void setTheta(double theta)
@@ -60,7 +63,9 @@ public class SimplePendulum extends UpdatableComponent
 	
 	public void update()
 	{
-		alpha=(-9.81 / length * Math.sin(theta));
+	    double meterLength= length/100;
+		alpha=(-9.81 / meterLength * Math.sin(theta));
+		//alpha = -9.81 * Math.sin(theta);
 		womega+= alpha * deltaTime;
 		theta+=womega*deltaTime;
 		repaint();
