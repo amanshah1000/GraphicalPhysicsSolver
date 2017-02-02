@@ -66,7 +66,23 @@ public class PhysicsProgram extends JFrame
 	public static void main(String[] arguments)
 	{
 		//main method calls the constructor to initialize the program
-		PhysicsProgram physicsProgram = new PhysicsProgram();
+        PhysicsProgram physicsProgram = new PhysicsProgram();
+        try {
+            UIManager.setLookAndFeel(
+                UIManager.getSystemLookAndFeelClassName());
+        }
+        catch (UnsupportedLookAndFeelException e) {
+            // handle exception
+        }
+        catch (ClassNotFoundException e) {
+            // handle exception
+        }
+        catch (InstantiationException e) {
+            // handle exception
+        }
+        catch (IllegalAccessException e) {
+            // handle exception
+        }
 		
 	}
 

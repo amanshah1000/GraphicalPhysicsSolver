@@ -12,15 +12,19 @@ import java.text.NumberFormat;
 public class PendulumPanel extends PhysicsPanel
 {
 
-    private JButton start;
-    private JButton stop;
+    private JButton startButton;
+    private JButton stopButton;
+    private JButton setButton;
     private JFormattedTextField thetaField;
     private JFormattedTextField lengthField;
     private NumberFormat thetaFormat;
     private NumberFormat lengthFormat;
     private RunnablePanel pendulumPanel;
-    private SimplePendulum pendulum;
+    private JPanel fieldPanel;
+    private JPanel upperButtonPanel;
+    private JPanel upperPanel;
     private ActionPanel lowerPanel;
+    private SimplePendulum pendulum;
     private PhysicsEquations Eq;
     private double thetaLocal;
     private double lengthLocal;
@@ -46,15 +50,25 @@ public class PendulumPanel extends PhysicsPanel
         pendulum = new SimplePendulum(length, Eq.degreesToRadian(theta));
         pendulumPanel = new RunnablePanel(pendulum);
         lowerPanel= new ActionPanel();
+        //lowerPanel.setBackground(Color.GRAY);
+        upperPanel = new JPanel(new BorderLayout());
+        upperPanel.setBackground(Color.WHITE);
+        upperButtonPanel = new JPanel();
+        upperButtonPanel.setBackground(Color.WHITE);
+        fieldPanel = new JPanel();
+        fieldPanel.setBackground(Color.WHITE);
+        //fieldPanel.setLayout(new GridLayout(1,5));
         //simulationPanel= new RunablePanel();
         pendulumPanel.setLayout(new BorderLayout());
         pendulumPanel.add(lowerPanel, BorderLayout.SOUTH);
+        pendulumPanel.add(upperPanel,BorderLayout.NORTH);
         //pendulumPanel.add(simulationPanel,BorderLayout.CENTER);
 
 
         //defines buttons
-        stop = new JButton("Stop");
-        start = new JButton("Start");
+        stopButton = new JButton("Stop");
+        startButton = new JButton("Start");
+        setButton = new  JButton("Set");
 
         //defines text fields
         lengthField = new JFormattedTextField(thetaFormat);
@@ -66,16 +80,31 @@ public class PendulumPanel extends PhysicsPanel
         thetaField.setColumns(4);
 
         //adds buttons to the panel
-        lowerPanel.add(start);
-        lowerPanel.add(stop);
-        lowerPanel.add(lengthField);
-        lowerPanel.add(thetaField);
+        lowerPanel.add(startButton);
+        lowerPanel.add(stopButton);
+
+        fieldPanel.add(new JLabel("Angle (deg)"));
+        fieldPanel.add(thetaField);
+        fieldPanel.add(new JLabel("                  "));
+        fieldPanel.add(new JLabel("Length (cm)"));
+        fieldPanel.add(lengthField);
+
+
+
+        //add the buttons to the upper button panel
+        upperButtonPanel.add(setButton);
+
+        //add the button and field panels to the upper panel
+        upperPanel.add(fieldPanel,BorderLayout.NORTH);
+        upperPanel.add(upperButtonPanel,BorderLayout.SOUTH);
+
 
         //add actionliseners to buttons on a clickable panel
         lengthField.addPropertyChangeListener("Length", lowerPanel);
         thetaField.addPropertyChangeListener("Theta", lowerPanel);
-        stop.addActionListener(lowerPanel);
-        start.addActionListener(lowerPanel);
+        stopButton.addActionListener(lowerPanel);
+        startButton.addActionListener(lowerPanel);
+        setButton.addActionListener(lowerPanel);
 
 
         //intitalizes the equation conversions/solver
@@ -105,27 +134,35 @@ public class PendulumPanel extends PhysicsPanel
 
             Object source = event.getSource();
 
-            if (source == stop)
+            if (source == stopButton)
             {
-                pendulum.setTheta(Eq.degreesToRadian((double)thetaField.getValue()));
+                //pendulum.setTheta(Eq.degreesToRadian((double)thetaField.getValue()));
 
                 //System.out.println((double)thetaField.getValue());
 
-                pendulum.setLength((double)lengthField.getValue());
-                pendulum.reset();
+                //pendulum.setLength((double)lengthField.getValue());
+                //pendulum.reset();
                 pendulumPanel.setRunning(false);
                 System.out.println("Stop clicked");
                 //mainPanel.run();
-            } else if (source == start)
+            } else if (source == startButton)
+            {
+                //pendulum.setTheta(Eq.degreesToRadian((double)thetaField.getValue()));
+                //System.out.println((double)thetaField.getValue());
+                //pendulum.setLength((double)lengthField.getValue());
+                //pendulum.reset();
+                System.out.println("Start clicked");
+                pendulumPanel.setRunning(true);
+                //mainPanel.run();
+            }
+            else if (source == setButton)
             {
                 pendulum.setTheta(Eq.degreesToRadian((double)thetaField.getValue()));
                 System.out.println((double)thetaField.getValue());
                 pendulum.setLength((double)lengthField.getValue());
                 pendulum.reset();
-                System.out.println("Start clicked");
-                pendulumPanel.setRunning(true);
-                //mainPanel.run();
             }
+
         }
 
         @Override
