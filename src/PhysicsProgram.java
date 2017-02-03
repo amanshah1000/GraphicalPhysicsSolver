@@ -32,9 +32,12 @@ public class PhysicsProgram extends JFrame
 
 	public PhysicsProgram()
 	{
+        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         //defines screen variables
-        screenWidth = 800;
-        screenHeight = 600;
+        //currently defined as 70% of the users screen
+        screenHeight =(int)(screenSize.getHeight()*(0.7));
+        screenWidth =(int)(screenSize.getWidth()*(0.7));
+
 
         Eq=new PhysicsEquations();
         pendulumPanel=new PendulumPanel(90,100);

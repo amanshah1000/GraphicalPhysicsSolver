@@ -42,6 +42,26 @@ public class SimplePendulum extends UpdatableComponent
 	{
 		this.length=length;
 	}
+
+	public double getTheta()
+    {
+        return theta;
+    }
+    public double getLength()
+    {
+        return length;
+    }
+
+    public double getWomega()
+    {
+        return womega;
+    }
+    public double getAlpha()
+    {
+        return alpha;
+    }
+
+
 	public void reset()
     {
 	   womega=0;
@@ -59,6 +79,7 @@ public class SimplePendulum extends UpdatableComponent
 		g.drawLine(anchorX, anchorY, ballX, ballY);
 		g.fillOval(anchorX - 3, anchorY - 4, 7, 7);
 		g.fillOval(ballX - 7, ballY - 7, 14, 14);
+
 	}
 	
 	public void update()
