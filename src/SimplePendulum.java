@@ -28,17 +28,21 @@ public class SimplePendulum extends UpdatableComponent
 	private double deltaTime;
 	private Image diceImage;
 	private boolean doesRotate;
+	private double totalTime=0;
+	private double meterLength;
+	private double period;
 
 	
 	public SimplePendulum(double length,double theta)
 	{
 		this.theta=theta;
 		this.length=length;
-		double meterLength=length/100;
+		meterLength=length/100;
 		alpha=(-9.81 / meterLength * Math.sin(theta));
 		//alpha =-9.81*Math.sin(theta);
         doesRotate=false;
-		deltaTime=0.0166;
+		deltaTime=0.01;
+		period=(2*Math.PI)*Math.pow((meterLength*theta/(9.81*Math.sin(theta))),0.5);
 
         try
         {
@@ -58,6 +62,7 @@ public class SimplePendulum extends UpdatableComponent
 	public void setLength(double length)
 	{
 		this.length=length;
+		meterLength=this.length/100;
 	}
 
 	public double getTheta()
@@ -88,6 +93,9 @@ public class SimplePendulum extends UpdatableComponent
 	public void reset()
     {
 	   womega=0;
+	   totalTime=0;
+	   alpha=(-9.81 / meterLength * Math.sin(theta));
+	   period=(2*Math.PI)*Math.pow((meterLength*theta/(9.81*Math.sin(theta))),0.5);
 	   repaint();
     }
 	
@@ -118,7 +126,9 @@ public class SimplePendulum extends UpdatableComponent
         g2d.setTransform(old);
         g2d.drawString("Alpha (m/s/s) = "+Math.round(alpha*100.0)/100.0,getWidth()/8,getHeight()/4-getHeight()/16);
         g2d.drawString("Omega (rad/s) = "+Math.round(womega*100.0)/100.0,getWidth()/8,getHeight()/4-getHeight()/16-getHeight()/16);
-
+        g2d.drawString("Time Elapsed(s) = "+Math.round(totalTime*100)/100.0,getWidth()/8,getHeight()/4-getHeight()/16+getHeight()/16);
+        g2d.drawString("Period (s) = "+Math.round(period*100)/100.0,getWidth()/8,getHeight()/4-getHeight()/16+getHeight()/8);
+        g2d.drawString("Theta (rad) = "+Math.round(theta*100)/100.0,getWidth()/8,getHeight()/4-getHeight()/16-getHeight()/8);
     }
 	
 	public void update()
@@ -127,7 +137,9 @@ public class SimplePendulum extends UpdatableComponent
 		alpha=(-9.81 / meterLength * Math.sin(theta));
 		//alpha = -9.81 * Math.sin(theta);
 		womega+= alpha * deltaTime;
-		theta+=womega*deltaTime;
+		theta+= womega*deltaTime;
+        totalTime+= deltaTime;
+		//period=(2*Math.PI)*Math.pow((meterLength/(9.81*Math.sin(theta))),0.5);
 		repaint();
 	}
 	

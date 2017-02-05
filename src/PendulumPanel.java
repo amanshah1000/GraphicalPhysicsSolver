@@ -50,7 +50,7 @@ public class PendulumPanel extends PhysicsPanel
         //mainPanel = new JPanel();
         //adds the pendulum to he array list
         pendulum = new SimplePendulum(length, Eq.degreesToRadian(theta));
-        pendulumPanel = new RunnablePanel(pendulum,16);
+        pendulumPanel = new RunnablePanel(pendulum,10);
         lowerPanel= new ActionPanel();
         lowerPanel.setBackground(Color.WHITE);
         upperPanel = new JPanel(new BorderLayout());
