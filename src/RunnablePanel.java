@@ -64,7 +64,6 @@ public class RunnablePanel extends JPanel implements Runnable
         this.isRunning = isRunning;
     }
 
-
     @Override
     public void run()
     {

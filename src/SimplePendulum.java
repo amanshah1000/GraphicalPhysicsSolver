@@ -38,7 +38,7 @@ public class SimplePendulum extends UpdatableComponent
 		alpha=(-9.81 / meterLength * Math.sin(theta));
 		//alpha =-9.81*Math.sin(theta);
         doesRotate=false;
-		deltaTime=0.01;
+		deltaTime=0.0166;
 
         try
         {
