@@ -16,6 +16,7 @@ public class PendulumPanel extends PhysicsPanel
     private JButton stopButton;
     private JButton setButton;
     private JButton rotatesButton;
+    private JButton singlePeriodButton;
     private JFormattedTextField thetaField;
     private JFormattedTextField lengthField;
     private NumberFormat thetaFormat;
@@ -24,12 +25,14 @@ public class PendulumPanel extends PhysicsPanel
     private JPanel fieldPanel;
     private JPanel upperButtonPanel;
     private JPanel upperPanel;
+    private JPanel eastPanel;
     private ActionPanel lowerPanel;
     private SimplePendulum pendulum;
     private PhysicsEquations Eq;
     private double thetaLocal;
     private double lengthLocal;
     private boolean doesRotate;
+    private boolean singlePeriod;
 
     public PendulumPanel(double theta, double length)
     {
@@ -59,11 +62,15 @@ public class PendulumPanel extends PhysicsPanel
         upperButtonPanel.setBackground(Color.WHITE);
         fieldPanel = new JPanel();
         fieldPanel.setBackground(Color.WHITE);
+        eastPanel = new JPanel();
+        eastPanel.setBackground(Color.WHITE);
+        eastPanel.setLayout(new GridLayout(12,1));
         //fieldPanel.setLayout(new GridLayout(1,5));
         //simulationPanel= new RunablePanel();
         pendulumPanel.setLayout(new BorderLayout());
         pendulumPanel.add(lowerPanel, BorderLayout.SOUTH);
         pendulumPanel.add(upperPanel,BorderLayout.NORTH);
+        pendulumPanel.add(eastPanel,BorderLayout.EAST);
         //pendulumPanel.add(simulationPanel,BorderLayout.CENTER);
 
 
@@ -71,7 +78,8 @@ public class PendulumPanel extends PhysicsPanel
         stopButton = new JButton("Stop");
         startButton = new JButton("Start");
         setButton = new  JButton("Set");
-        rotatesButton=new JButton("Rotates?");
+        rotatesButton = new JButton("Rotates?");
+        singlePeriodButton = new JButton("Single Period?");
 
         //defines text fields
         lengthField = new JFormattedTextField(thetaFormat);
@@ -96,11 +104,15 @@ public class PendulumPanel extends PhysicsPanel
 
         //add the buttons to the upper button panel
         upperButtonPanel.add(setButton);
-        upperButtonPanel.add(rotatesButton);
+
 
         //add the button and field panels to the upper panel
         upperPanel.add(fieldPanel,BorderLayout.NORTH);
         upperPanel.add(upperButtonPanel,BorderLayout.SOUTH);
+
+        //add buttons to the east panel
+        eastPanel.add(rotatesButton);
+        eastPanel.add(singlePeriodButton);
 
 
         //add actionliseners to buttons on a clickable panel
@@ -110,9 +122,11 @@ public class PendulumPanel extends PhysicsPanel
         startButton.addActionListener(lowerPanel);
         setButton.addActionListener(lowerPanel);
         rotatesButton.addActionListener(lowerPanel);
+        singlePeriodButton.addActionListener(lowerPanel);
 
         // inits other variables
         doesRotate=true;
+        singlePeriod=false;
         pendulum.doesRotate(doesRotate);
         //intitalizes the equation conversions/solver
 
@@ -173,6 +187,10 @@ public class PendulumPanel extends PhysicsPanel
                 doesRotate=!doesRotate;
                 pendulum.doesRotate(doesRotate);
                 System.out.println("rotates is: "+doesRotate);
+            }
+            else if(source==singlePeriodButton)
+            {
+
             }
 
         }
