@@ -17,6 +17,7 @@ public class Waves extends UpdatableComponent
     
     	super();
         this.velocity=velocity;
+        frequency=1;
         
     }
     public void setVelocity(double velocity){

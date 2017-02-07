@@ -21,9 +21,10 @@ public class WavesPanel extends PhysicsPanel
     //private SpeedofSoundEq Speed;
     private JButton calc;
     private JButton clear;
-    private JFormattedTextField tempField;
+    private JFormattedTextField wavelenghtField;
     private NumberFormat thetaFormat;
 	private SpeedofSound2 speedOfSound2;
+	private Waves wavesComponent;
 //	private double temperature;
 	
 
@@ -40,7 +41,7 @@ public class WavesPanel extends PhysicsPanel
     {
 
         //defines panels
-		WavesPanel = new WavesPanel(velocity);
+		WavesPanel = new RunnablePanel(wavesComponent);
 		/*
         pendulum = new SimplePendulum(length, theta);
         pendulumPanel = new RunnablePanel(pendulum);
@@ -54,8 +55,6 @@ public class WavesPanel extends PhysicsPanel
         //mainPanel = new JPanel();
        // speedOfSound2 =new UpdatableComponent();
         
-        
-        WavesPanel = new RunnablePanel(Waves);
 
         lowerPanel= new ActionPanel(); 
    
@@ -78,11 +77,11 @@ public class WavesPanel extends PhysicsPanel
 
         //defines text fields
 
-        tempField = new JFormattedTextField(thetaFormat);
+        wavelenghtField = new JFormattedTextField(thetaFormat);
 
-        tempField.setValue(0);
+        wavelenghtField.setValue(0);
 
-        tempField.setColumns(4);
+        wavelenghtField.setColumns(4);
 
         //adds buttons to the panel
 
@@ -90,7 +89,7 @@ public class WavesPanel extends PhysicsPanel
 
         lowerPanel.add(clear);
 
-        lowerPanel.add(tempField);
+        lowerPanel.add(wavelenghtField);
 
 
 
@@ -98,7 +97,7 @@ public class WavesPanel extends PhysicsPanel
 
         //add actionliseners to buttons on a clickable panel
 
-        tempField.addPropertyChangeListener("Temperature",lowerPanel);
+        wavelenghtField.addPropertyChangeListener("WaveLength",lowerPanel);
 
 
 
@@ -107,12 +106,12 @@ public class WavesPanel extends PhysicsPanel
         clear.addActionListener(lowerPanel);
 
         //starts the tread in the main panel
-        WavesPanel.add(wavelength);
+        WavesPanel.add(wavelenghtField);
         WavesPanel.repaint();
 
-        Thread speedOfSoundThread = new Thread(WavesPanel);
+        Thread wavesThread = new Thread(WavesPanel);
 
-        speedOfSoundThread.start();
+        wavesThread.start();
 
         this.setLayout(new BorderLayout());
         this.add(WavesPanel,BorderLayout.CENTER);
@@ -131,15 +130,15 @@ public class WavesPanel extends PhysicsPanel
 
             if (source == calc)
             {
-				String text = tempField.getText();
+				String text = wavelenghtField.getText();
 				
-				double temper= Double.parseDouble(text);
+				double wavelength = Double.parseDouble(text);
 				WavesPanel.setRunning(true);
-				speedOfSound2.setTemperature(temper);
-				speedOfSound2.calculate(temper);
-				speedOfSound2.repaint();
+				wavesComponent.setWavelength(wavelength);
+				wavesComponent.calculate(wavelength);
+				wavesComponent.repaint();
 				
-				System.out.print(temper);
+				System.out.print(wavelength);
 				
 				System.out.println("Calc clicked");
                 //mainPanel.run();

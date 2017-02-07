@@ -33,6 +33,7 @@ public class SimplePendulum extends UpdatableComponent
     private Image diceImage;
     private boolean doesRotate;
     private boolean singlePeriod;
+    private int periodCount;
 
 	
 	public SimplePendulum(double length,double theta)
@@ -52,7 +53,9 @@ public class SimplePendulum extends UpdatableComponent
 
         try
         {
+            //both of these image methods work
             diceImage = ImageIO.read(new File("dice.png"));
+            //diceImage = Toolkit.getDefaultToolkit().getImage("dice.png");
         } catch (IOException ex)
         {
             Logger.getLogger(PendulumPanel.class.getName()).log(Level.WARNING,null,ex);
@@ -149,6 +152,7 @@ public class SimplePendulum extends UpdatableComponent
 	
 	public void update()
 	{
+
 	    double meterLength = length/100;
 		alpha=(-9.80665 / meterLength * Math.sin(theta));
 		//alpha = -9.81 * Math.sin(theta);

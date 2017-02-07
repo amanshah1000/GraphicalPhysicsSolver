@@ -15,6 +15,7 @@ public class PhysicsProgram extends JFrame
     private JPanel mainPanel;
     private PendulumPanel pendulumPanel;
     private SpeedOfSoundPanel speedOfSoundPanel;
+    private WavesPanel wavesPanel;
     private int screenWidth;
     private int screenHeight;
     private PhysicsEquations Eq;
@@ -26,6 +27,7 @@ public class PhysicsProgram extends JFrame
 		JTabbedPane tabbedPane = new JTabbedPane();
 		tabbedPane.addTab("Pendulum", pendulumPanel);
 		tabbedPane.addTab("SpeedOfSound", speedOfSoundPanel);
+		tabbedPane.addTab("Waves",wavesPanel);
        
 		pane.add(tabbedPane, BorderLayout.CENTER);
 	}
@@ -39,9 +41,10 @@ public class PhysicsProgram extends JFrame
         screenWidth =(int)(screenSize.getWidth()*(0.7));
 
 
-        Eq=new PhysicsEquations();
-        pendulumPanel=new PendulumPanel(90,100);
-        speedOfSoundPanel=new SpeedOfSoundPanel(100,1000);
+        Eq = new PhysicsEquations();
+        pendulumPanel = new PendulumPanel(90,100);
+        speedOfSoundPanel = new SpeedOfSoundPanel(100,1000);
+        wavesPanel = new WavesPanel(100,100);
 
 		
 	  	

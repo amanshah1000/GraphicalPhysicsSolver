@@ -64,7 +64,7 @@ public class PendulumPanel extends PhysicsPanel
         fieldPanel.setBackground(Color.WHITE);
         eastPanel = new JPanel();
         eastPanel.setBackground(Color.WHITE);
-        eastPanel.setLayout(new GridLayout(12,1));
+        eastPanel.setLayout(new GridLayout(15,1));
         //fieldPanel.setLayout(new GridLayout(1,5));
         //simulationPanel= new RunablePanel();
         pendulumPanel.setLayout(new BorderLayout());
