@@ -33,7 +33,7 @@ public class SimplePendulum extends UpdatableComponent
     private Image diceImage;
     private boolean doesRotate;
     private boolean singlePeriod;
-    private int periodCount;
+    private int periodCount=-1;
 
 	
 	public SimplePendulum(double length,double theta)
@@ -115,6 +115,7 @@ public class SimplePendulum extends UpdatableComponent
 	   period=(2*Math.PI)*Math.pow((meterLength*theta/(9.80665*Math.sin(theta))),0.5);
 	   //simple harmonic motion using small angle aprox
 	   //period=(2*Math.PI)*Math.pow((meterLength/(9.81)),0.5);
+        periodCount=-1;
 	   repaint();
     }
 	
@@ -152,7 +153,10 @@ public class SimplePendulum extends UpdatableComponent
 	
 	public void update()
 	{
+        if(periodCount==0)
+        {
 
+        }
 	    double meterLength = length/100;
 		alpha=(-9.80665 / meterLength * Math.sin(theta));
 		//alpha = -9.81 * Math.sin(theta);

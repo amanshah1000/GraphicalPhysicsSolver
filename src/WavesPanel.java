@@ -40,6 +40,7 @@ public class WavesPanel extends PhysicsPanel
 
     {
 
+        wavesComponent = new Waves(600);
         //defines panels
 		WavesPanel = new RunnablePanel(wavesComponent);
 		/*
@@ -106,7 +107,7 @@ public class WavesPanel extends PhysicsPanel
         clear.addActionListener(lowerPanel);
 
         //starts the tread in the main panel
-        WavesPanel.add(wavelenghtField);
+        WavesPanel.add(wavesComponent);
         WavesPanel.repaint();
 
         Thread wavesThread = new Thread(WavesPanel);

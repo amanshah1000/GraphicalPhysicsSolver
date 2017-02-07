@@ -43,7 +43,7 @@ public class Waves extends UpdatableComponent
         g.setColor(Color.BLACK);
         
 
-        g.drawString("Speed of Sound at " + wavelength + "degrees Celsius:" + String.valueOf(wavelength) + "m/s", getWidth()/2, getHeight()/2);
+        g.drawString("Wavelength is " + wavelength + "when Frequency is:" + String.valueOf(wavelength) + "m/s", getWidth()/2, getHeight()/2);
         
 
     }
