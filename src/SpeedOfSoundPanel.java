@@ -40,7 +40,10 @@ public class SpeedOfSoundPanel extends PhysicsPanel
     {
 
         //defines panels
-		speedOfSound2 = new SpeedofSound2(temperature);
+		speedOfSound2 = new SpeedofSound2(temperature, speedOfSoundPanel);
+			
+		//	MovableObject tempGauge = new MovableObject(speedOfSoundPanel, "TempGauge.jpg", 100,10, 50,50);	
+	
 		/*
         pendulum = new SimplePendulum(length, theta);
         pendulumPanel = new RunnablePanel(pendulum);
@@ -67,6 +70,10 @@ public class SpeedOfSoundPanel extends PhysicsPanel
         speedOfSoundPanel.setLayout(new BorderLayout());
 
         speedOfSoundPanel.add(lowerPanel,BorderLayout.SOUTH);
+      //  	MovableObject tempGauge = new MovableObject(speedOfSoundPanel, "TempGauge.png", 100,10, 50,50);	
+      //		speedOfSoundPanel.add(tempGauge);
+      //  		tempGauge.draw();
+
 
       //  speedOfSoundPanel.add(speedOfSoundPanel,BorderLayout.CENTER);
         //defines buttons
