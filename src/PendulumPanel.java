@@ -5,6 +5,7 @@ import java.awt.event.ActionListener;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.text.NumberFormat;
+import java.util.*;
 
 /**
  * Created by markmcconachie on 1/21/17.
@@ -33,6 +34,7 @@ public class PendulumPanel extends PhysicsPanel
     private double lengthLocal;
     private boolean doesRotate;
     private boolean singlePeriod;
+    
 
     public PendulumPanel(double theta, double length)
     {
@@ -47,13 +49,11 @@ public class PendulumPanel extends PhysicsPanel
 
     public void init(double theta, double length)
     {
-
-
         //defines panels
         //mainPanel = new JPanel();
         //adds the pendulum to he array list
-        pendulum = new SimplePendulum(length, Eq.degreesToRadian(theta));
-        pendulumPanel = new RunnablePanel(pendulum,10);
+        pendulum = new SimplePendulum(length, Math.toRadians(theta));
+        pendulumPanel = new RunnablePanel(pendulum,16);
         lowerPanel= new ActionPanel();
         lowerPanel.setBackground(Color.WHITE);
         upperPanel = new JPanel(new BorderLayout());
@@ -99,8 +99,6 @@ public class PendulumPanel extends PhysicsPanel
         fieldPanel.add(new JLabel("                  "));
         fieldPanel.add(new JLabel("Length (cm)"));
         fieldPanel.add(lengthField);
-
-
 
         //add the buttons to the upper button panel
         upperButtonPanel.add(setButton);
@@ -173,6 +171,7 @@ public class PendulumPanel extends PhysicsPanel
                 //pendulum.reset();
                 System.out.println("Start clicked");
                 pendulumPanel.setRunning(true);
+                pendulum.resetTime();
                 //mainPanel.run();
             }
             else if (source == setButton)
@@ -190,7 +189,9 @@ public class PendulumPanel extends PhysicsPanel
             }
             else if(source==singlePeriodButton)
             {
-
+                singlePeriod=!singlePeriod;
+                pendulum.useSinglePeriod(singlePeriod);
+                System.out.println("singlePeriod is: "+singlePeriod);
             }
 
         }

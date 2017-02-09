@@ -28,6 +28,8 @@ public class SimplePendulum extends UpdatableComponent
 	private double length;
 	private double deltaTime;
 	private double totalTime=0;
+	private long currentSystemTime;
+    private long originalSystemTime;
 	private double meterLength;
 	private double period;
     private Image diceImage;
@@ -39,15 +41,16 @@ public class SimplePendulum extends UpdatableComponent
 	public SimplePendulum(double length,double theta)
 	{
 		this.theta=theta;
-		this.thetaOld=theta;
+		this.thetaOld=Math.round(Math.toDegrees(theta)*10000)/10000;
 		this.length=length;
 		meterLength=length/100;
 		alpha=(-9.80665 / meterLength * Math.sin(theta));
 		//alpha =-9.81*Math.sin(theta);
         doesRotate=false;
         singlePeriod=false;
-		deltaTime=0.01;
+		deltaTime=0.0166;
 		period=(2*Math.PI)*Math.pow((meterLength*theta/(9.80665*Math.sin(theta))),0.5);
+		originalSystemTime=System.currentTimeMillis();
         //simple harmonic motion using small angle aprox
         //period=(2*Math.PI)*Math.pow((meterLength/(9.81)),0.5);
 
@@ -67,7 +70,7 @@ public class SimplePendulum extends UpdatableComponent
 	public void setTheta(double theta)
 	{
 		this.theta=theta;
-		this.thetaOld=theta;
+		this.thetaOld=Math.round(Math.toDegrees(theta)*10000)/10000;
 	}
 	public void setLength(double length)
 	{
@@ -102,21 +105,26 @@ public class SimplePendulum extends UpdatableComponent
         this.singlePeriod=singlePeriod;
 
     }
+    public void resetTime()
+    {
+        originalSystemTime=System.currentTimeMillis();
+    }
 
 
 
 
     public void reset()
     {
-	   womega=0;
-	   totalTime=0;
-	   alpha=(-9.80665 / meterLength * Math.sin(theta));
+        womega=0;
+        totalTime=0;
+        alpha=(-9.80665 / meterLength * Math.sin(theta));
 	   //my derivation for period not using small angle aprox
-	   period=(2*Math.PI)*Math.pow((meterLength*theta/(9.80665*Math.sin(theta))),0.5);
+        period=(2*Math.PI)*Math.pow((meterLength*theta/(9.80665*Math.sin(theta))),0.5);
 	   //simple harmonic motion using small angle aprox
 	   //period=(2*Math.PI)*Math.pow((meterLength/(9.81)),0.5);
         periodCount=-1;
-	   repaint();
+        originalSystemTime=System.currentTimeMillis();
+        repaint();
     }
 	
 	public void paint(Graphics g) 
@@ -149,22 +157,29 @@ public class SimplePendulum extends UpdatableComponent
         g2d.drawString("Time Elapsed(s) = "+Math.round(totalTime*100000)/100000.0,getWidth()/8,getHeight()/4-getHeight()/16+getHeight()/16);
         g2d.drawString("Period (s) = "+Math.round(period*100000)/100000.0,getWidth()/8,getHeight()/4-getHeight()/16+getHeight()/8);
         g2d.drawString("Theta (deg) = "+Math.round(Math.toDegrees(theta)*100)/100.0,getWidth()/8,getHeight()/4-getHeight()/16-getHeight()/8);
+        g2d.drawString("Theta (deg) = "+Math.toDegrees(theta),getWidth()/8,getHeight()/2);
     }
 	
 	public void update()
 	{
-        if(periodCount==0)
+	    if(Math.round(Math.toDegrees(theta)*10000)/10000==thetaOld)
         {
+            periodCount+= 1;
+            //System.out.println("theta: "+Math.round(Math.toDegrees(theta)*10000)/10000+" theta Old: "+Math.round(Math.toDegrees(thetaOld)*10000)/10000);
+            //System.out.println(totalTime);
+            //System.out.println((System.currentTimeMillis()-originalSystemTime)/Math.pow(10,3));
+            System.out.println(periodCount);
 
         }
-	    double meterLength = length/100;
-		alpha=(-9.80665 / meterLength * Math.sin(theta));
-		//alpha = -9.81 * Math.sin(theta);
-		womega+= alpha * deltaTime;
-		theta+= womega*deltaTime;
-        totalTime+= deltaTime;
-		//period=(2*Math.PI)*Math.pow((meterLength/(9.81*Math.sin(theta))),0.5);
-		repaint();
+            long originalTime=System.nanoTime();
+            double meterLength = length / 100;
+            alpha = (-9.80665 / meterLength * Math.sin(theta));
+            //alpha = -9.81 * Math.sin(theta);
+            womega += alpha * deltaTime;
+            theta += womega * deltaTime;
+            //totalTime += deltaTime;
+            //period=(2*Math.PI)*Math.pow((meterLength/(9.81*Math.sin(theta))),0.5);
+            repaint();
 	}
 	
 	
