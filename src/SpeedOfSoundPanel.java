@@ -11,10 +11,9 @@ import java.text.NumberFormat;
  */
 public class SpeedOfSoundPanel extends PhysicsPanel
 {
-
     private RunnablePanel speedOfSoundPanel;
-
-    private ActionPanel lowerPanel;//clickable panel is defined in the bottom of this class
+    private ActionPanel fieldPanel;
+    //clickable panel is defined in the bottom of this class
     //private RunnablePanel simulationPanel;//runnable panel is defined in the bottom of this class
 
     private PhysicsEquations Eq;
@@ -22,20 +21,21 @@ public class SpeedOfSoundPanel extends PhysicsPanel
     private JButton calc;
     private JButton clear;
     private JFormattedTextField tempField;
+
     private NumberFormat thetaFormat;
 	private SpeedofSound2 speedOfSound2;
 //	private double temperature;
 	
 
-    public SpeedOfSoundPanel(double temperature, double velocity)
+    public SpeedOfSoundPanel(double temperature)
     {
         super();
           Eq= new PhysicsEquations();
-        init(temperature,velocity);
+        init(temperature);
     }
 
 
-    public void init(double temperature, double velocity)
+    public void init(double temperature)
 
     {
 
@@ -56,20 +56,18 @@ public class SpeedOfSoundPanel extends PhysicsPanel
 
         //mainPanel = new JPanel();
        // speedOfSound2 =new UpdatableComponent();
-        
-        
-        speedOfSoundPanel=new RunnablePanel(speedOfSound2);
-        
 
-        lowerPanel= new ActionPanel(); 
+        speedOfSoundPanel=new RunnablePanel(speedOfSound2);
+
+        fieldPanel = new ActionPanel();
+        fieldPanel.setBackground(Color.WHITE);
    
         //speedOfSoundPanel.add(speedOfSound2);
 
         //simulationPanel= new RunablePanel();
 
         speedOfSoundPanel.setLayout(new BorderLayout());
-
-        speedOfSoundPanel.add(lowerPanel,BorderLayout.SOUTH);
+        speedOfSoundPanel.add(fieldPanel,BorderLayout.NORTH);
       //  	MovableObject tempGauge = new MovableObject(speedOfSoundPanel, "TempGauge.png", 100,10, 50,50);	
       //		speedOfSoundPanel.add(tempGauge);
       //  		tempGauge.draw();
@@ -87,32 +85,24 @@ public class SpeedOfSoundPanel extends PhysicsPanel
         //defines text fields
 
         tempField = new JFormattedTextField(thetaFormat);
-
         tempField.setValue(0);
-
         tempField.setColumns(4);
 
         //adds buttons to the panel
 
-        lowerPanel.add(calc);
 
-        lowerPanel.add(clear);
+        fieldPanel.add(new JLabel("Enter Temperature(°C)"));
+        fieldPanel.add(tempField);
+        fieldPanel.add(calc);
+        fieldPanel.add(clear);
 
-        lowerPanel.add(tempField);
+        //add actionlisteners to buttons on a clickable panel
 
-
-
-
-
-        //add actionliseners to buttons on a clickable panel
-
-        tempField.addPropertyChangeListener("Temperature",lowerPanel);
+        tempField.addPropertyChangeListener("Temperature",fieldPanel);
 
 
-
-        calc.addActionListener(lowerPanel);
-
-        clear.addActionListener(lowerPanel);
+        calc.addActionListener(fieldPanel);
+        clear.addActionListener(fieldPanel);
 
         //starts the tread in the main panel
         speedOfSoundPanel.add(speedOfSound2);
