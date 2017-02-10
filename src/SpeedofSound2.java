@@ -1,6 +1,4 @@
 import javax.swing.*;
-import java.awt.geom.*;
-import java.util.*;
 import java.awt.*;
 
 import java.awt.Color;
