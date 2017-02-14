@@ -41,7 +41,7 @@ public class SpringPanel extends PhysicsPanel
         upperButtonPanel = new JPanel();
         upperButtonPanel.setBackground(Color.WHITE);
 
-        spring = new SimpleSpring(1);
+        spring = new SimpleSpring(1,100,0);
         springPanel = new RunnablePanel(spring);
 
         fieldPanel = new JPanel();

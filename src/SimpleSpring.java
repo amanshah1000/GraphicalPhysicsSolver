@@ -12,13 +12,17 @@ public class SimpleSpring extends UpdatableComponent
 {
     private double period;
     private double mass;
+    private double k; // k is the spring constant
+    private double displacement;
     private Image springImage;
-    private double compression;
 
-    public SimpleSpring(double mass)
+
+    public SimpleSpring(double mass,double k, double displacement)
     {
         //sets mass
         this.mass=mass*100;
+        this.displacement=displacement;
+        this.k=k;
         try
         {
             //both of these image methods work
@@ -53,6 +57,7 @@ public class SimpleSpring extends UpdatableComponent
         g.fillOval(anchorX +(22), anchorY - (50), 7, 7);
         g2d.drawImage(springImage, anchorX, anchorY-100,500,100,this);
         g.drawRect(anchorX+475,getHeight()/2-75,(int)mass/2,(int)50);
+
     }
 
     public void update()
