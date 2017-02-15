@@ -14,6 +14,9 @@ public class SimpleSpring extends UpdatableComponent
     private double mass;
     private double k; // k is the spring constant
     private double displacement;
+    private double acceleration;
+    private double velocity;
+    private double deltaTime;
     private Image springImage;
 
 
@@ -23,6 +26,8 @@ public class SimpleSpring extends UpdatableComponent
         this.mass=mass*100;
         this.displacement=displacement;
         this.k=k;
+        deltaTime=0.0166;
+        acceleration = (-k*displacement)/mass;
         try
         {
             //both of these image methods work
@@ -35,6 +40,16 @@ public class SimpleSpring extends UpdatableComponent
 
 
     }
+    public void setK(double k)
+    {
+        this.k=k;
+    }
+    public void setDisplacement(double displacement)
+    {
+        this.displacement=displacement;
+    }
+
+
 
     public void setMass(double mass)
     {
@@ -43,6 +58,8 @@ public class SimpleSpring extends UpdatableComponent
 
     public void reset()
     {
+		acceleration = (-k*displacement)/mass;
+    	velocity=0;
         repaint();
     }
 
@@ -55,13 +72,23 @@ public class SimpleSpring extends UpdatableComponent
         g.setColor(Color.BLACK);
         int anchorX = getWidth()/32, anchorY = getHeight() / 2;
         g.fillOval(anchorX +(22), anchorY - (50), 7, 7);
-        g2d.drawImage(springImage, anchorX, anchorY-100,500,100,this);
-        g.drawRect(anchorX+475,getHeight()/2-75,(int)mass/2,(int)50);
+        g2d.drawImage(springImage, anchorX, anchorY-100,(int)(500+displacement),100,this);
+        g.setColor(Color.cyan);
+        g.fillRect((int)((anchorX+475)+displacement),getHeight()/2-75,(int)mass/2,(int)50);
+		g.setColor(Color.BLACK);
+		g.drawRect((int)((anchorX+475)+displacement),getHeight()/2-75,(int)mass/2,(int)50);
+		//g.setColor(Color.RED);
+        //g.drawOval((int)((anchorX+475+7)),getHeight()/2+150,7,7);
 
     }
 
     public void update()
     {
+        acceleration = (-k*displacement)/mass;
+        velocity += acceleration*deltaTime;
+        displacement += velocity*deltaTime;
+
+
         repaint();
     }
 

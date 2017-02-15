@@ -51,8 +51,13 @@ public class SonofCousinPanel extends PhysicsPanel {
         angleField = new JFormattedTextField(thetaFormat);
         angleField.setValue(0);
         angleField.setColumns(4);
-        
-        fieldPanel.add(new JLabel("Enter Angle(X°)"));
+		veloField = new JFormattedTextField(thetaFormat);
+		veloField.setValue(0);
+		veloField.setColumns(4);
+
+
+
+		fieldPanel.add(new JLabel("Enter Angle(Xï¿½)"));
         fieldPanel.add(angleField);
         fieldPanel.add(new JLabel("Enter Initial Velocity(X m/s)"));
         fieldPanel.add(veloField);
