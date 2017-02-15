@@ -1,10 +1,10 @@
-/**
- * @(#)ProjectileMotion.java
- *
- *
- * @author 
- * @version 1.00 2017/2/6
- */
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
+import java.text.NumberFormat;
 
 public class ProjectileMotion extends UpdatableComponent{
         
@@ -15,6 +15,7 @@ public class ProjectileMotion extends UpdatableComponent{
     private JPanel ProjectilePanel;
     private double angle;
 	private double initVelocity;
+	private final double g = -9.8;
 
 
     public ProjectileMotion(double angle, double initVelocity, JPanel ProjectilePanel ) {
@@ -36,12 +37,9 @@ public class ProjectileMotion extends UpdatableComponent{
     /**
      * @param args the command line arguments
      */
-    public void calculate(double angle, double initVelocity){
-    
-    speed=330.64+(.6*temperature);
-
+    public void calculate(double angle, double initVelocity)
+    {
+    	
     }
-    public static void main(String[] args) {
-        // TODO code application logic here
-    }
+   
 }

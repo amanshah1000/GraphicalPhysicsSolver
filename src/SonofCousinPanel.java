@@ -6,17 +6,20 @@ import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.text.NumberFormat;
 
+
 public class SonofCousinPanel extends PhysicsPanel {
         
     /**
      * Creates a new instance of <code>SonofCousinPanel</code>.
      */
      
-     private ActionPanel lowerPanel;
+     private ActionPanel buttonPanel;
      private RunnablePanel runPanel;
+     private JPanel fieldPanel;
      private ProjectileMotion projectile;
      private JButton calc;
      private JButton clear;
+     private JButton run;
      private JFormattedTextField angleField;
      private JFormattedTextField veloField;
 	 private NumberFormat thetaFormat;
@@ -28,36 +31,39 @@ public class SonofCousinPanel extends PhysicsPanel {
     	init(angle, initVelocity);
     }
     
-    public void init(double temperature, double velocity)
+    public void init(double angle, double initVelocity)
     {
     	projectile = new ProjectileMotion(angle, initVelocity, runPanel);
     	
     	runPanel = new RunnablePanel(projectile);
-    	lowerPanel = new ActionPanel();
-        lowerPanel.setBackground(Color.WHITE);
+    	buttonPanel = new ActionPanel();
+        buttonPanel.setBackground(Color.WHITE);
+        fieldPanel = new JPanel();
     	
     	runPanel.setLayout(new BorderLayout());
         runPanel.add(fieldPanel,BorderLayout.NORTH);
+        runPanel.add(buttonPanel, BorderLayout.SOUTH);
         
         calc  = new JButton("Calculate");
         clear = new JButton("Clear");
+        run = new JButton("Run");
         
-        tempField = new JFormattedTextField(thetaFormat);
-        tempField.setValue(0);
-        tempField.setColumns(4);
+        angleField = new JFormattedTextField(thetaFormat);
+        angleField.setValue(0);
+        angleField.setColumns(4);
         
-        lowerPanel.add(new JLabel("Enter Angle(X°)"));
-        lowerPanel.add(angleField);
-        lowerPanel.add(new JLabel("Enter Initial Velocity(X m/s)"));
-        lowerPanel.add(veloField);
+        fieldPanel.add(new JLabel("Enter Angle(X°)"));
+        fieldPanel.add(angleField);
+        fieldPanel.add(new JLabel("Enter Initial Velocity(X m/s)"));
+        fieldPanel.add(veloField);
         
-        lowerPanel.add(calc);
-        lowerPanel.add(clear);
-        tempField.addPropertyChangeListener("Angle",lowerPanel);
-		tempField.addPropertyChangeListener("Initial Velocity",lowerPanel);
+        buttonPanel.add(calc);
+        buttonPanel.add(clear);
+        //angleField.addPropertyChangeListener("Angle",lowerPanel);
+		//tempField.addPropertyChangeListener("Initial Velocity",lowerPanel);
 
-        calc.addActionListener(lowerPanel);
-        clear.addActionListener(lowerPanel);
+        calc.addActionListener(buttonPanel);
+        clear.addActionListener(buttonPanel);
         
         runPanel.add(projectile);
         projectile.repaint();
