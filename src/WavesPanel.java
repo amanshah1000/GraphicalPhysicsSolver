@@ -80,7 +80,7 @@ public class WavesPanel extends PhysicsPanel
 
         wavelenghtField = new JFormattedTextField(thetaFormat);
 
-        wavelenghtField.setValue(0);
+        wavelenghtField.setValue(1.0);
 
         wavelenghtField.setColumns(4);
 

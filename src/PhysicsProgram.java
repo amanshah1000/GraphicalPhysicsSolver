@@ -41,8 +41,10 @@ public class PhysicsProgram extends JFrame
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         //defines screen variables
         //currently defined as 70% of the users screen
-        screenHeight =(int)(screenSize.getHeight()*(0.7));
-        screenWidth =(int)(screenSize.getWidth()*(0.7));
+        //screenHeight =(int)(screenSize.getHeight()*(0.7));
+        //screenWidth =(int)(screenSize.getWidth()*(0.7));
+		screenWidth=800;
+		screenHeight=600;
 
 
         Eq = new PhysicsEquations();

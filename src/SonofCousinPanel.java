@@ -57,7 +57,7 @@ public class SonofCousinPanel extends PhysicsPanel {
 
 
 
-		fieldPanel.add(new JLabel("Enter Angle(X�)"));
+		fieldPanel.add(new JLabel("Enter Angle(X°)"));
         fieldPanel.add(angleField);
         fieldPanel.add(new JLabel("Enter Initial Velocity(X m/s)"));
         fieldPanel.add(veloField);
