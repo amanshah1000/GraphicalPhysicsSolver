@@ -29,46 +29,36 @@ private JPanel SpeedOfSoundPanel;
     	super();
     	this.SpeedOfSoundPanel=SpeedOfSoundPanel;
         this.temperature=temperature;
+        //inputs image
         try
         {
-
             mainImage = ImageIO.read(new File("SpeedOfSound.png"));
-            //speedImage = ImageIO.read(new File("speedGauge.png"));
 
         } catch (IOException ex)
         {
             Logger.getLogger(SpeedOfSoundPanel.class.getName()).log(Level.WARNING,null,ex);
         }
-        /*
-        try
-        {
-            tempImage = ImageIO.read(new File("thermometer.png"));
-
-        } catch (IOException ex)
-        {
-            Logger.getLogger(SpeedOfSoundPanel.class.getName()).log(Level.WARNING,null,ex);
-        }
-        */
-
-        
     }
   
     public void setTemperature(double temperature){
       this.temperature=temperature;
     }
+
     public void update(){
     	repaint();
     }
-    public void setSpeed(double speed){
+
+    public void setSpeed(double speed) {
         this.speed= speed;
     }
-    public void calculate(double temperature){
-    speed=330.64+(.6*temperature);
 
+    public void calculate(double temperature){
+        speed=330.64+(.6*temperature);
     }
 	public void paint(Graphics g) 
     {
         Graphics2D g2d = (Graphics2D)g;
+
         g.setColor(Color.WHITE);
 
         g.fillRect(0, 0, getWidth(), getHeight());
@@ -85,8 +75,9 @@ private JPanel SpeedOfSoundPanel;
         g.drawString(String.valueOf(speed), getWidth()-(37*getWidth()/200), getHeight()-(5*getHeight()/16));
 
         //center coordinates
-        int x1= 645;
-        int y1 = 260;
+        //300 m/s = -215
+        //400 m/s = 30
+
 
         //for loops create grid with printed coordinates to determine points
         /*
@@ -107,33 +98,20 @@ private JPanel SpeedOfSoundPanel;
 
         }
         */
-        g.drawLine(x1,y1,0,0);
-        /*
-        int x2=0;
-        int y2=0;
-        if(speed<300) {
-             x2 = getWidth() - (3 * getWidth() / 12);
-             y2 = getHeight() - (23 * getHeight() / 50);
-        }
-        else if(speed<500 || speed>=300){
-            x2 = getWidth() - (8 * getWidth() / 36);
-            y2 = getHeight() - (28 * getHeight() / 50);
-        }
-        if(speed>=500){
-            x2 = getWidth() - (3 * getWidth() / 36);
-            y2 = getHeight() - (23 * getHeight() / 50);
 
-        }
-        */
         double yCalculated;
-        //quadratic equation created to convert temperature to coordinates
-        if(temperature<140) {
-            yCalculated = (-.0009 * temperature * temperature) - (1.85 * temperature) + (375);
+        //equation created to convert temperature to coordinates
+        if(temperature<100 &&temperature>-30) {
+            yCalculated = (-2*temperature)+300;
         }
-        else {
+        //limits so temperature doesn't go off thermometer
+        else if(temperature>=100){
             yCalculated = 95;
         }
-        //finds the changing height in relation to yCalulated and the bottom of the thermometer
+        else {
+            yCalculated=360;
+        }
+        //finds the changing height in relation to yCalculated and the bottom of the thermometer
         double heightCalculated = Math.abs(yCalculated-380);
 
         g2d.setColor(Color.RED);
@@ -141,22 +119,31 @@ private JPanel SpeedOfSoundPanel;
 
         g2d.fillRect(57,(int)yCalculated,20,(int)heightCalculated);
 
-//bottom left is 55,375
-        /*
-        int x=getWidth()-(445*getWidth()/480);
-        int y=getHeight()-(17*getHeight()/48);
 
-        g.fillRect(x,y,23,1);
-        */
+        //center coordinates
+        //300 m/s = -215
+        //400 m/s = 30
+        //350 m/s= -90
 
+        int x1= 645;
+        int y1 = 260;
+        double theta;
+        //created quadratic equation converting speed to a theta value
+        if(speed<400 && speed>300) {
+            theta = (-0.001000 * speed * speed) + (3.150 * speed) - 1070;
+        }
+        //limits so line doesn't go off gauge
+        else if(speed>400){
+            theta=30;
+        }
+        else {
+            theta=-215;
+        }
 
+        g2d.setColor(Color.black);
+        g2d.rotate(Math.toRadians(theta),x1,y1);
 
-       // g.drawString("Next, plug in your temperature, in this case: "+ temperature + " , to the equation: velocity = 330.64 + .6(" + temperature, getWidth()/2, (getHeight()/2)-25);
-        
-       
-
-        //g.drawString("Speed of Sound at " + temperature + " degrees Celsius: " + String.valueOf(speed) + "m/s", getWidth()/2, getHeight()/2);
-        
+        g2d.drawLine(x1,y1, x1+70,y1);
 
     }
 }
