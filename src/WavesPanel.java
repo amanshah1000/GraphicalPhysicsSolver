@@ -138,7 +138,7 @@ public class WavesPanel extends PhysicsPanel
 				double wavelength = Double.parseDouble(text);
 				WavesPanel.setRunning(true);
 				wavesComponent.setWavelength(wavelength);
-				wavesComponent.calculate();
+				//wavesComponent.calculate();
 				wavesComponent.repaint();
 				
 				System.out.print(wavelength);

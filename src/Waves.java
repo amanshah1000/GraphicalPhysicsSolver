@@ -13,6 +13,7 @@ public class Waves extends UpdatableComponent
     private double wavelength;
     private double velocity;
     private double speed;
+    private double length;
 
     public Waves(double velocity)
     {
