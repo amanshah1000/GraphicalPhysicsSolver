@@ -125,7 +125,7 @@ public class Waves extends UpdatableComponent
 
         g.drawString("Wavelength is " + wavelength + "when Frequency is:" + String.valueOf(wavelength) + "m/s", getWidth()/2, getHeight()/2);
         drawWave(g,0,getHeight()/2,50,1,wavelength);
-        drawTrajectory(g,0,getHeight()/2,20,85);
+        //drawTrajectory(g,0,getHeight()/2,20,85);
         /*
 		g.setColor(Color.BLACK);
 		drawTrajectory(g,0,getHeight()/2,20,40);
