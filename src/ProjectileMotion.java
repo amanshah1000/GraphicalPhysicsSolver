@@ -135,9 +135,17 @@ public class ProjectileMotion extends UpdatableComponent{
 	
 		Graphics2D g2d = (Graphics2D)g;
 
-		drawTrajectory(g,(getWidth()/16)+100,350);
 
-		//g2d.rotate(Math.toRadians(90),20, 560 );
+		drawTrajectory(g,75+(int)(60*Math.cos(Math.toRadians(angle))),350-(int)(60*Math.sin(Math.toRadians(angle))));
+		//g2d.rotate(Math.toRadians(90),20, 560 ); (Deprecated)
+		g2d.rotate(Math.toRadians(-angle), 75, 350);
+		g2d.drawImage(mainImage,getWidth()/16, getHeight() - (getHeight()/3), 100, 100, this);
+		g.setColor(Color.gray);
+		g.fillOval(getWidth()/16, getHeight() - (getHeight()/4), 40, 40);
+
+		/*
+		g.setColor(Color.BLUE);
+
 		for( int i = 0; i <= 800; i = i+10)
 		{
 			g2d.drawLine(i, 0, i, 600);
@@ -151,10 +159,9 @@ public class ProjectileMotion extends UpdatableComponent{
 			String k = String.valueOf(j);
 			g2d.drawString(k, 0, j);
 		}
-		g2d.rotate(Math.toRadians(-angle), 80, 365);
-		g2d.drawImage(mainImage,getWidth()/16, getHeight() - (getHeight()/3), 100, 100, this);
-		g.setColor(Color.gray);
-		g.fillOval(getWidth()/16, getHeight() - (getHeight()/4), 40, 40);
+
+		*/
+
 	//	AffineTransform old = g2d.getTransform();
 	//	g2d.rotate(angle);
 		

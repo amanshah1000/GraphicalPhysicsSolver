@@ -101,7 +101,7 @@ public class SonofCousinPanel extends PhysicsPanel {
 				String text2 = veloField.getText();
 				
 				double angle = Double.parseDouble(text1);
-				if(angle > 90 || angle < 0)
+				if(angle > 90 || angle <= 0)
 				{
 					if(angle > 90)
 					{
@@ -111,7 +111,7 @@ public class SonofCousinPanel extends PhysicsPanel {
 					
 					else 
 					{
-						angle = 0;
+						angle = .00001;
 						angleField.setText("0");
 					}
 				}
