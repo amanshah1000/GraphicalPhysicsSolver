@@ -50,14 +50,14 @@ public class SonofCousinPanel extends PhysicsPanel {
         run = new JButton("Fire");
         
         angleField = new JFormattedTextField(thetaFormat);
-        angleField.setValue(0);
+        angleField.setValue(angle);
         angleField.setColumns(4);
         
         veloField = new JFormattedTextField();
-        veloField.setValue(0);
+        veloField.setValue(initVelocity);
         veloField.setColumns(4);
         
-        fieldPanel.add(new JLabel("Enter Angle(°)"));
+        fieldPanel.add(new JLabel("Enter Angle(ï¿½)"));
         fieldPanel.add(angleField);
         fieldPanel.add(new JLabel("Enter Initial Velocity(m/s)"));
         fieldPanel.add(veloField);
@@ -118,7 +118,7 @@ public class SonofCousinPanel extends PhysicsPanel {
 				double velo = Double.parseDouble(text2);
 				runPanel.setRunning(true);
 				projectile.setAngle(angle);
-				
+				projectile.setVelocity(velo);
 				projectile.repaint();
 				
 				System.out.print(angle);

@@ -57,17 +57,54 @@ public class ProjectileMotion extends UpdatableComponent{
         this.angle = angle;
     }
     
-    public void setVelocity(double initVelocity){
+    public void setVelocity(double initVelocity)
+	{
         this.initVelocity= initVelocity;
         
     }
     /**
-     * @param args the command line arguments
+     * @param //args the command line arguments
      */
-   
-    
-    public void drawTrajectory(Graphics g)
-    {	
+
+	public void drawTrajectory(Graphics g,int initialX,int initialY)
+	{
+		g.setColor(Color.RED);
+		double functionX;
+		double functionY;
+		double xVelo = initVelocity*Math.cos(Math.toRadians(angle));
+		double yVelo = initVelocity*Math.sin(Math.toRadians(angle));
+		double range = (Math.pow(initVelocity,2) * Math.sin(2*Math.toRadians(angle)))/(9.81);
+		//the denominator of the step function is the number of points on the trajectory
+		double step = range/(30*(initVelocity/20));
+		//scale is used as a multiplier. so if you have a scale of X, that means X pixels = 1 meter
+		int scale = 10;
+		int currentX;
+		int currentY;
+
+		for (double i=0;i<=range;i=i+step)
+		{
+			functionX = i;
+            /*(i/xVelo)^2 is the time squared, there for when you sub that into the 2nd
+            *kinematic you end ump with yPosition as a function of xPosition
+            * therefore you can loop through all the xPositions and calculate there yPositions
+            * */
+
+			functionY = (-4.9*Math.pow((i/xVelo),2))+(Math.tan(Math.toRadians(angle))*i);
+			currentX =(int)(functionX*scale);
+			currentY = (int)(functionY*scale);
+
+
+			g.fillOval(currentX+initialX,initialY-currentY,4,4);
+		}
+		g.setColor(Color.BLACK);
+
+
+
+	}
+
+	public void drawTrajectoryDeprecated(Graphics g)
+    {
+
     	double xVelo = initVelocity * Math.sin(Math.toRadians(angle));
     	double yVelo = initVelocity * Math.cos(Math.toRadians(angle));
     	double range = (Math.pow(xVelo, 2) * Math.sin(Math.toRadians(angle))) / 9.81;
@@ -97,11 +134,11 @@ public class ProjectileMotion extends UpdatableComponent{
 		g.fillRect(0,0,getWidth(), getHeight());
 	
 		Graphics2D g2d = (Graphics2D)g;
-		g.setColor(Color.RED);
-		drawTrajectory(g);
-		g2d.rotate(Math.toRadians(-angle), 80, 365);
+
+		drawTrajectory(g,(getWidth()/16)+100,350);
+
 		//g2d.rotate(Math.toRadians(90),20, 560 );
-		/*for( int i = 0; i <= 800; i = i+10)
+		for( int i = 0; i <= 800; i = i+10)
 		{
 			g2d.drawLine(i, 0, i, 600);
 			String k = String.valueOf(i);
@@ -113,7 +150,8 @@ public class ProjectileMotion extends UpdatableComponent{
 			g2d.drawLine(0,j, 800, j);
 			String k = String.valueOf(j);
 			g2d.drawString(k, 0, j);
-		}*/
+		}
+		g2d.rotate(Math.toRadians(-angle), 80, 365);
 		g2d.drawImage(mainImage,getWidth()/16, getHeight() - (getHeight()/3), 100, 100, this);
 		g.setColor(Color.gray);
 		g.fillOval(getWidth()/16, getHeight() - (getHeight()/4), 40, 40);

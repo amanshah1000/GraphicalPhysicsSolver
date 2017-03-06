@@ -1,4 +1,6 @@
 
+import com.sun.xml.internal.ws.policy.privateutil.PolicyUtils;
+
 import java.awt.*;
 import java.io.File;
 import java.io.IOException;
@@ -9,8 +11,8 @@ import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import javax.swing.JComponent;
 
-public class Waves extends UpdatableComponent
-{
+public class Waves extends UpdatableComponent 
+{ 
     private double frequency;
     private double wavelength;
     private double velocity;
@@ -43,9 +45,8 @@ public class Waves extends UpdatableComponent
         }
 
     }
-
     public void update(){
-        repaint();
+    	repaint();
     }
     public void setWavelength(double wavelength){
         this.wavelength= wavelength;
@@ -76,20 +77,20 @@ public class Waves extends UpdatableComponent
 
 
 
-        for (double i=0;i<=maxSteps;i=i+step)
-        {
-            functionX=i;
-            functionY=Math.sin(wavelength*(i));
-            nxtFunctionX=i+step;
-            nxtFunctionY=Math.sin(wavelength*(i+step));
-            currentX= initialX+(int)(functionX *scale);
-            currentY= initialY+(int)(functionY *scale);
-            nxtX= initialX+(int)(nxtFunctionX *scale);
-            nxtY= initialY+(int)(nxtFunctionY *scale);
+       for (double i=0;i<=maxSteps;i=i+step)
+       {
+           functionX=i;
+           functionY=Math.sin(wavelength*(i));
+           nxtFunctionX=i+step;
+           nxtFunctionY=Math.sin(wavelength*(i+step));
+           currentX= initialX+(int)(functionX *scale);
+           currentY= initialY+(int)(functionY *scale);
+           nxtX= initialX+(int)(nxtFunctionX *scale);
+           nxtY= initialY+(int)(nxtFunctionY *scale);
 
 
-            g.drawLine(currentX,currentY,nxtX,nxtY);
-        }
+           g.drawLine(currentX,currentY,nxtX,nxtY);
+       }
 
 
 
@@ -104,9 +105,9 @@ public class Waves extends UpdatableComponent
         double yVelo = velocity*Math.sin(Math.toRadians(angle));
         double range = (Math.pow(velocity,2) * Math.sin(2*Math.toRadians(angle)))/(9.81);
         //the denominator of the step function is the number of points on the trajectory
-        double step = range/30;
-        //scale is used as a multiplier. so if you have a scale of X, that means X pixels = 1 meter
-        int scale = 10;
+		double step = range/30;
+		//scale is used as a multiplier. so if you have a scale of X, that means X pixels = 1 meter
+		int scale = 10;
         int currentX;
         int currentY;
 
@@ -130,16 +131,16 @@ public class Waves extends UpdatableComponent
 
     }
 
-    public void paint(Graphics g)
+	public void paint(Graphics g) 
     {
-        Graphics2D g2d = (Graphics2D)g;
+		Graphics2D g2d = (Graphics2D)g;
         g.setColor(Color.WHITE);
 
         g.fillRect(0, 0, getWidth(), getHeight());
-
+        
         g.setColor(Color.BLACK);
-        //g.setColor(Color.RED);
-
+		//g.setColor(Color.RED);
+        
 
         g.drawString( "Closed Columns : " + " Length is " + length + " m when Wavelength is " + wavelength + " m/s", getWidth()/2, getHeight()/2);
 
@@ -163,14 +164,15 @@ public class Waves extends UpdatableComponent
 		g.setColor(Color.RED);
 		drawTrajectory(g,0,getHeight()/2,20,15);
 		*/
-        //g.setColor(Color.BLACK);
-        //g.drawLine(0,getHeight()/2,getWidth(),getHeight()/2);
+		//g.setColor(Color.BLACK);
+		//g.drawLine(0,getHeight()/2,getWidth(),getHeight()/2);
 
 
 
     }
 }
+          
 
-
-
-
+          
+          
+          

@@ -20,23 +20,25 @@ public class WavesPanel extends PhysicsPanel
     private PhysicsEquations Eq;
     //private SpeedofSoundEq Speed;
     private JButton calc;
-    private JButton clear;
+    private JButton openClose;
+    //private JButton clear;
     private JFormattedTextField wavelenghtField;
     private NumberFormat thetaFormat;
 	private SpeedofSound2 speedOfSound2;
 	private Waves wavesComponent;
+	private boolean isOpen;
 //	private double temperature;
 	
 
-    public WavesPanel(double wavelength, double velocity)
+    public WavesPanel(double wavelength, double length)
     {
         super();
           Eq= new PhysicsEquations();
-        init(wavelength,velocity);
+        init(wavelength,length);
     }
 
 
-    public void init(double wavelength, double velocity)
+    public void init(double wavelength, double length)
 
     {
 
@@ -65,14 +67,15 @@ public class WavesPanel extends PhysicsPanel
 
         WavesPanel.setLayout(new BorderLayout());
 
-        WavesPanel.add(lowerPanel,BorderLayout.SOUTH);
+        WavesPanel.add(lowerPanel,BorderLayout.NORTH);
 
       //  speedOfSoundPanel.add(speedOfSoundPanel,BorderLayout.CENTER);
         //defines buttons
 
         calc  = new JButton("Calculate");
+        openClose = new JButton("Open / Closed");
 
-        clear = new JButton("Clear");
+        //clear = new JButton("Clear");
 
 
 
@@ -85,12 +88,16 @@ public class WavesPanel extends PhysicsPanel
         wavelenghtField.setColumns(4);
 
         //adds buttons to the panel
+        
+        lowerPanel.add(new JLabel("Enter Wavelength(m)"));
+        lowerPanel.add(wavelenghtField);
 
         lowerPanel.add(calc);
+        lowerPanel.add(openClose);
 
-        lowerPanel.add(clear);
+        //lowerPanel.add(clear);
 
-        lowerPanel.add(wavelenghtField);
+
 
 
 
@@ -104,7 +111,7 @@ public class WavesPanel extends PhysicsPanel
 
         calc.addActionListener(lowerPanel);
 
-        clear.addActionListener(lowerPanel);
+        openClose.addActionListener(lowerPanel);
 
         //starts the tread in the main panel
         WavesPanel.add(wavesComponent);
@@ -136,22 +143,23 @@ public class WavesPanel extends PhysicsPanel
 				double wavelength = Double.parseDouble(text);
 				WavesPanel.setRunning(true);
 				wavesComponent.setWavelength(wavelength);
-				wavesComponent.calculate(wavelength);
+				//wavesComponent.calculate();
 				wavesComponent.repaint();
 				
 				System.out.print(wavelength);
 				
+				
 				System.out.println("Calc clicked");
                 //mainPanel.run();
-            } else if (source == clear)
-            {
-                System.out.println("clear clicked");
-				WavesPanel.setRunning(true);
-				
-               
-                //mainPanel.run();
             }
-        }
+            else if (source==openClose)
+			{
+				isOpen=!isOpen;
+				//TODO set is open in waves
+				//System.out.println("rotates is: "+doesRotate);
+
+			}
+		}
 
         @Override
         public void propertyChange(PropertyChangeEvent evt)
@@ -163,3 +171,4 @@ public class WavesPanel extends PhysicsPanel
 
 
 }
+
