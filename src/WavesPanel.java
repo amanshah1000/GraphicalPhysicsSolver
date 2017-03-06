@@ -41,8 +41,8 @@ public class WavesPanel extends PhysicsPanel
     public void init(double wavelength, double length)
 
     {
-
-        wavesComponent = new Waves(600);
+		isOpen=false;
+        wavesComponent = new Waves(wavelength);
         //defines panels
 		WavesPanel = new RunnablePanel(wavesComponent);
 		/*
@@ -83,7 +83,7 @@ public class WavesPanel extends PhysicsPanel
 
         wavelenghtField = new JFormattedTextField(thetaFormat);
 
-        wavelenghtField.setValue(0);
+        wavelenghtField.setValue(wavelength);
 
         wavelenghtField.setColumns(4);
 
@@ -124,6 +124,7 @@ public class WavesPanel extends PhysicsPanel
         this.setLayout(new BorderLayout());
         this.add(WavesPanel,BorderLayout.CENTER);
 
+
     }
     
     public class ActionPanel extends JPanel implements ActionListener, PropertyChangeListener
@@ -155,9 +156,10 @@ public class WavesPanel extends PhysicsPanel
             else if (source==openClose)
 			{
 				isOpen=!isOpen;
+				wavesComponent.setOpen(isOpen);
 				//TODO set is open in waves
-				//System.out.println("rotates is: "+doesRotate);
-
+				System.out.println("Open is: "+isOpen);
+				wavesComponent.repaint();
 			}
 		}
 

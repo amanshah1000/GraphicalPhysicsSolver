@@ -20,13 +20,15 @@ public class Waves extends UpdatableComponent
     private double length;
     private Image closedImage;
     private Image openImage;
-    public Waves(double velocity)
+    private boolean isOpen;
+    public Waves(double wavelength)
     {
 
         super();
         this.velocity=velocity;
         frequency=1;
-        wavelength=1;
+        this.wavelength=wavelength;
+        isOpen=false;
         try
         {
             closedImage = ImageIO.read(new File("Tube Closed.png"));
@@ -51,10 +53,13 @@ public class Waves extends UpdatableComponent
     public void setWavelength(double wavelength){
         this.wavelength= wavelength;
     }
-    public void calculate(double velocity){
+    public void calculate(double velocity)
+    {
         wavelength = velocity/frequency;
 
     }
+    public void setOpen(boolean isOPen) {this.isOpen=isOPen;}
+
     public void drawWave(Graphics g,int x,int y,int scale,double periods,double wavelength)
     {
         //resolution is how close each step is to the other the higher the resolution the higher the step.
@@ -146,8 +151,16 @@ public class Waves extends UpdatableComponent
 
         //g.drawString("Wavelength is " + wavelength + "when Frequency is:" + String.valueOf(wavelength) + "m/s", getWidth()/2, getHeight()/2);
         drawWave(g,0,getHeight()/2,50,1,wavelength);
-        g2d.drawImage(closedImage, 300,200, 200,200, this);
-        g2d.drawImage(openImage, 300,200, 200,200, this);
+        if(isOpen)
+        {
+            g2d.drawImage(openImage, 300,200-60, 200,200, this);
+        }
+        else
+        {
+            g2d.drawImage(closedImage, 300,200-60, 200,200, this);
+        }
+
+
 
         //drawTrajectory(g,0,getHeight()/2,20,85);
         /*
