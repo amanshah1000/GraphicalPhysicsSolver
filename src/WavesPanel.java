@@ -28,15 +28,15 @@ public class WavesPanel extends PhysicsPanel
 //	private double temperature;
 	
 
-    public WavesPanel(double wavelength, double velocity)
+    public WavesPanel(double wavelength, double length)
     {
         super();
           Eq= new PhysicsEquations();
-        init(wavelength,velocity);
+        init(wavelength,length);
     }
 
 
-    public void init(double wavelength, double velocity)
+    public void init(double wavelength, double length)
 
     {
 
@@ -65,7 +65,7 @@ public class WavesPanel extends PhysicsPanel
 
         WavesPanel.setLayout(new BorderLayout());
 
-        WavesPanel.add(lowerPanel,BorderLayout.SOUTH);
+        WavesPanel.add(lowerPanel,BorderLayout.NORTH);
 
       //  speedOfSoundPanel.add(speedOfSoundPanel,BorderLayout.CENTER);
         //defines buttons
@@ -80,11 +80,13 @@ public class WavesPanel extends PhysicsPanel
 
         wavelenghtField = new JFormattedTextField(thetaFormat);
 
-        wavelenghtField.setValue(1.0);
+        wavelenghtField.setValue(0);
 
         wavelenghtField.setColumns(4);
 
         //adds buttons to the panel
+        
+        lowerPanel.add(new JLabel("Enter Wavelength(m)"));
 
         lowerPanel.add(calc);
 
@@ -136,10 +138,11 @@ public class WavesPanel extends PhysicsPanel
 				double wavelength = Double.parseDouble(text);
 				WavesPanel.setRunning(true);
 				wavesComponent.setWavelength(wavelength);
-				wavesComponent.calculate(wavelength);
+				wavesComponent.calculate();
 				wavesComponent.repaint();
 				
 				System.out.print(wavelength);
+				
 				
 				System.out.println("Calc clicked");
                 //mainPanel.run();
@@ -163,3 +166,4 @@ public class WavesPanel extends PhysicsPanel
 
 
 }
+
