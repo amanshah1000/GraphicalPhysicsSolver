@@ -1,3 +1,4 @@
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -46,24 +47,25 @@ public class SonofCousinPanel extends PhysicsPanel {
         
         calc  = new JButton("Calculate");
         clear = new JButton("Clear");
-        run = new JButton("Run");
+        run = new JButton("Fire");
         
         angleField = new JFormattedTextField(thetaFormat);
         angleField.setValue(0);
         angleField.setColumns(4);
-		veloField = new JFormattedTextField(thetaFormat);
-		veloField.setValue(0);
-		veloField.setColumns(4);
-
-
-
-		fieldPanel.add(new JLabel("Enter Angle(XÂ°)"));
+        
+        veloField = new JFormattedTextField();
+        veloField.setValue(0);
+        veloField.setColumns(4);
+        
+        fieldPanel.add(new JLabel("Enter Angle(°)"));
         fieldPanel.add(angleField);
-        fieldPanel.add(new JLabel("Enter Initial Velocity(X m/s)"));
+        fieldPanel.add(new JLabel("Enter Initial Velocity(m/s)"));
         fieldPanel.add(veloField);
         
         buttonPanel.add(calc);
         buttonPanel.add(clear);
+        buttonPanel.add(run);
+        
         //angleField.addPropertyChangeListener("Angle",lowerPanel);
 		//tempField.addPropertyChangeListener("Initial Velocity",lowerPanel);
 
@@ -99,10 +101,24 @@ public class SonofCousinPanel extends PhysicsPanel {
 				String text2 = veloField.getText();
 				
 				double angle = Double.parseDouble(text1);
+				if(angle > 90 || angle < 0)
+				{
+					if(angle > 90)
+					{
+						angle = 90;
+						angleField.setText("90");
+					}
+					
+					else 
+					{
+						angle = 0;
+						angleField.setText("0");
+					}
+				}
 				double velo = Double.parseDouble(text2);
 				runPanel.setRunning(true);
 				projectile.setAngle(angle);
-				projectile.calculate(angle, velo);
+				
 				projectile.repaint();
 				
 				System.out.print(angle);
