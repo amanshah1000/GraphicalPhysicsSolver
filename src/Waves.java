@@ -123,7 +123,9 @@ public class Waves extends UpdatableComponent
 		//g.setColor(Color.RED);
         
 
-        g.drawString("Wavelength is " + wavelength + "when Frequency is:" + String.valueOf(wavelength) + "m/s", getWidth()/2, getHeight()/2);
+        g.drawString( "Closed Columns : " + " Length is " + length + " m when Wavelength is " + wavelength + " m/s", getWidth()/2, getHeight()/2);
+
+        //g.drawString("Wavelength is " + wavelength + "when Frequency is:" + String.valueOf(wavelength) + "m/s", getWidth()/2, getHeight()/2);
         drawWave(g,0,getHeight()/2,50,1,wavelength);
         //drawTrajectory(g,0,getHeight()/2,20,85);
         /*
@@ -143,7 +145,7 @@ public class Waves extends UpdatableComponent
 		//g.setColor(Color.BLACK);
 		//g.drawLine(0,getHeight()/2,getWidth(),getHeight()/2);
 
-        
+
 
     }
 }
