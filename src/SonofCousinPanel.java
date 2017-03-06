@@ -111,7 +111,7 @@ public class SonofCousinPanel extends PhysicsPanel {
 					
 					else 
 					{
-						angle = .00001;
+						angle = .001;
 						angleField.setText("0");
 					}
 				}

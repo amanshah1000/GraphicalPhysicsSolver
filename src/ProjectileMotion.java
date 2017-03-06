@@ -75,13 +75,13 @@ public class ProjectileMotion extends UpdatableComponent{
 		double yVelo = initVelocity*Math.sin(Math.toRadians(angle));
 		double range = (Math.pow(initVelocity,2) * Math.sin(2*Math.toRadians(angle)))/(9.81);
 		//the denominator of the step function is the number of points on the trajectory
-		double step = range/(30*(initVelocity/20));
+		double step = range/((30*(angle/90))*(initVelocity/20));
 		//scale is used as a multiplier. so if you have a scale of X, that means X pixels = 1 meter
 		int scale = 10;
 		int currentX;
 		int currentY;
 
-		for (double i=0;i<=range;i=i+step)
+		for (double i=0;i<=range+(270/angle);i=i+step)
 		{
 			functionX = i;
             /*(i/xVelo)^2 is the time squared, there for when you sub that into the 2nd
@@ -137,11 +137,15 @@ public class ProjectileMotion extends UpdatableComponent{
 
 
 		drawTrajectory(g,75+(int)(60*Math.cos(Math.toRadians(angle))),350-(int)(60*Math.sin(Math.toRadians(angle))));
+		g.setColor(new Color(113,59,28));
+		g.fillRect(0,getHeight() - (getHeight()/4)+40,800,350);
 		//g2d.rotate(Math.toRadians(90),20, 560 ); (Deprecated)
+		AffineTransform old = g2d.getTransform();
 		g2d.rotate(Math.toRadians(-angle), 75, 350);
 		g2d.drawImage(mainImage,getWidth()/16, getHeight() - (getHeight()/3), 100, 100, this);
+		g2d.setTransform(old);
 		g.setColor(Color.gray);
-		g.fillOval(getWidth()/16, getHeight() - (getHeight()/4), 40, 40);
+		g.fillOval(getWidth()/15 +5, getHeight() - (getHeight()/4), 40, 40);
 
 		/*
 		g.setColor(Color.BLUE);

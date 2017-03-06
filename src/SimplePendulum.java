@@ -143,15 +143,15 @@ public class SimplePendulum extends UpdatableComponent
 		//sets the old transform so that you can unrotate the screen
         AffineTransform old = g2d.getTransform();
 		if(doesRotate==true)
-        {
-            g2d.rotate((theta*.25)+Math.toRadians(womega), ballX , ballY);
-        }
+		{
+			g2d.rotate((theta*.25)+Math.toRadians(womega), ballX , ballY);
+		}
 
-        //diceTransform.rotate( Math.toRadians(theta));
-        //diceTransform.translate(ballX-25,ballY-25);
-        g2d.drawImage(diceImage, ballX-25, ballY-25,50,50,this);
-       // g.finalize();
-        g2d.setTransform(old);
+		//diceTransform.rotate( Math.toRadians(theta));
+		//diceTransform.translate(ballX-25,ballY-25);
+		g2d.drawImage(diceImage, ballX-25, ballY-25,50,50,this);
+		// g.finalize();
+		g2d.setTransform(old);
         g2d.drawString("Alpha (rad/s/s) = "+Math.round(alpha*100.0)/100.0,getWidth()/8,getHeight()/4-getHeight()/16);
         g2d.drawString("Omega (rad/s) = "+Math.round(womega*100.0)/100.0,getWidth()/8,getHeight()/4-getHeight()/16-getHeight()/16);
         g2d.drawString("Time Elapsed(s) = "+Math.round(totalTime*100000)/100000.0,getWidth()/8,getHeight()/4-getHeight()/16+getHeight()/16);
