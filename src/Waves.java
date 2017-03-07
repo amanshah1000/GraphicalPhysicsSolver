@@ -57,11 +57,11 @@ public class Waves extends UpdatableComponent
     {
     	if(isOpen)
     	{
-    		length = 0.25 * wavelength;
+    		wavelength = 4 * length;
     	}
     	else
     	{
-    		length = 0.75 * wavelength;
+    		wavelength = 1.33 * length;
     	}
     }
     
