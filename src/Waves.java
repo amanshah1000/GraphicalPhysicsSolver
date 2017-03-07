@@ -1,5 +1,4 @@
-
-import com.sun.xml.internal.ws.policy.privateutil.PolicyUtils;
+//import com.sun.xml.internal.ws.policy.privateutil.PolicyUtils;
 
 import java.awt.*;
 import java.io.File;
@@ -53,11 +52,20 @@ public class Waves extends UpdatableComponent
     public void setWavelength(double wavelength){
         this.wavelength= wavelength;
     }
-    public void calculate(double velocity)
+    
+    public void calculate()
     {
-        wavelength = velocity/frequency;
-
+    	if(isOpen)
+    	{
+    		length = 0.25 * wavelength;
+    	}
+    	else
+    	{
+    		length = 0.75 * wavelength;
+    	}
     }
+    
+    
     public void setOpen(boolean isOPen) {this.isOpen=isOPen;}
 
     public void drawWave(Graphics g,int x,int y,int scale,double periods,double wavelength)
@@ -189,3 +197,4 @@ public class Waves extends UpdatableComponent
           
           
           
+
