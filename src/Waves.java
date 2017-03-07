@@ -20,6 +20,7 @@ public class Waves extends UpdatableComponent
     private Image closedImage;
     private Image openImage;
     private boolean isOpen;
+    private double harmonic;
     public Waves(double wavelength)
     {
 
@@ -57,11 +58,11 @@ public class Waves extends UpdatableComponent
     {
     	if(isOpen)
     	{
-    		wavelength = 4 * length;
+    		wavelength = harmonic/4 * length;
     	}
     	else
     	{
-    		wavelength = 1.33 * length;
+    		wavelength = harmonic/2 * length;
     	}
     }
     

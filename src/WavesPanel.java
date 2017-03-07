@@ -89,7 +89,7 @@ public class WavesPanel extends PhysicsPanel
 
         //adds buttons to the panel
         
-        lowerPanel.add(new JLabel("Enter Wavelength(m)"));
+        lowerPanel.add(new JLabel("Enter Harmonic Number"));
         lowerPanel.add(wavelenghtField);
 
         lowerPanel.add(calc);
@@ -173,4 +173,5 @@ public class WavesPanel extends PhysicsPanel
 
 
 }
+
 
