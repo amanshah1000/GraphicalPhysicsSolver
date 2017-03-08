@@ -106,9 +106,9 @@ public class Waves extends UpdatableComponent
        for (double i=0;i<=maxSteps;i=i+step)
        {
            functionX=i;
-           functionY=alternator*Math.cos((1/wavelength)*(i));
+           functionY=alternator*1.28*Math.cos((1/wavelength)*(i));
            nxtFunctionX=i+step;
-           nxtFunctionY=alternator*Math.cos((1/wavelength)*(i+step));
+           nxtFunctionY=alternator*1.28*Math.cos((1/wavelength)*(i+step));
            currentX= initialX+(int)(functionX *scale);
            currentY= initialY+(int)(functionY *scale);
            nxtX= initialX+(int)(nxtFunctionX *scale);
@@ -136,7 +136,7 @@ public class Waves extends UpdatableComponent
 			alternator=1;
 		}
 		System.out.println(wavelength);
-		double resolution =64;
+		double resolution =64*(1/wavelength);
 		double step = (2*Math.PI)/resolution;
 		double maxSteps=(2*Math.PI)*periods;
 		double functionX;
@@ -155,9 +155,9 @@ public class Waves extends UpdatableComponent
 		for (double i=0;i<=maxSteps;i=i+step)
 		{
 			functionX=i;
-			functionY=alternator*Math.sin((1/wavelength)*(i));
+			functionY=alternator*1.35*Math.sin((1/wavelength)*(i));
 			nxtFunctionX=i+step;
-			nxtFunctionY=alternator*Math.sin((1/wavelength)*(i+step));
+			nxtFunctionY=alternator*1.35*Math.sin((1/wavelength)*(i+step));
 			currentX= initialX+(int)(functionX *scale);
 			currentY= initialY+(int)(functionY *scale);
 			nxtX= initialX+(int)(nxtFunctionX *scale);
@@ -168,6 +168,25 @@ public class Waves extends UpdatableComponent
 		}
 
 	}
+	public void drawGrid(Graphics g)
+	{
+		g.setColor(Color.BLUE);
+		Graphics2D g2d = (Graphics2D)g;
+		for( int i = 0; i <= 800; i = i+10)
+		{
+			g2d.drawLine(i, 0, i, 600);
+			String k = String.valueOf(i);
+			g2d.drawString(k,i,  0);
+		}
+
+		for( int j = 0; j <= 600; j = j+10)
+		{
+			g2d.drawLine(0,j, 800, j);
+			String k = String.valueOf(j);
+			g2d.drawString(k, 0, j);
+		}
+	}
+
 
 	public void paint(Graphics g) 
     {
@@ -186,19 +205,21 @@ public class Waves extends UpdatableComponent
 
         if(isOpen)
         {
+			g.setColor(Color.RED);
             g2d.drawImage(openImage, getWidth()/2-200,200-60, 400,200, this);
             calculate();
-			drawCosWave(g,0,getHeight()/2,50,1,false);
-			drawCosWave(g,0,getHeight()/2,50,1,true);
+			drawCosWave(g,getWidth()/2-200,getHeight()/2-6,63,1,false);
+			drawCosWave(g,getWidth()/2-200,getHeight()/2-6,63,1,true);
         }
         else
         {
+        	g.setColor(Color.RED);
             g2d.drawImage(closedImage, getWidth()/2-200,200-60, 400,200, this);
 			calculate();
-			drawSinWave(g,0,getHeight()/2,50,1,false);
-			drawSinWave(g,0,getHeight()/2,50,1,true);
+			drawSinWave(g,getWidth()/2-200+27,getHeight()/2-6,59,1,false);
+			drawSinWave(g,getWidth()/2-200+27,getHeight()/2-6,59,1,true);
         }
-
+		//drawGrid(g);
 
 
         //drawTrajectory(g,0,getHeight()/2,20,85);
@@ -215,10 +236,25 @@ public class Waves extends UpdatableComponent
 		drawTrajectory(g,0,getHeight()/2,20,20);
 		g.setColor(Color.RED);
 		drawTrajectory(g,0,getHeight()/2,20,15);
-		*/
+
 		//g.setColor(Color.BLACK);
 		//g.drawLine(0,getHeight()/2,getWidth(),getHeight()/2);
+		g.setColor(Color.BLUE);
 
+		for( int i = 0; i <= 800; i = i+10)
+		{
+			g2d.drawLine(i, 0, i, 600);
+			String k = String.valueOf(i);
+			g2d.drawString(k,i,  0);
+		}
+
+		for( int j = 0; j <= 600; j = j+10)
+		{
+			g2d.drawLine(0,j, 800, j);
+			String k = String.valueOf(j);
+			g2d.drawString(k, 0, j);
+		}
+		*/
 
 
     }
