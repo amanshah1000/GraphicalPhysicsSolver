@@ -145,7 +145,7 @@ public class WavesPanel extends PhysicsPanel
 				double harmonic = Double.parseDouble(text);
 				//WavesPanel.setRunning(true);
 				wavesComponent.setHarmonic(harmonic);
-				wavesComponent.calculate();
+				//wavesComponent.calculate();
 				wavesComponent.repaint();
 				
 				System.out.print(harmonic);

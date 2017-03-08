@@ -60,23 +60,32 @@ public class Waves extends UpdatableComponent
     	System.out.println(isOpen);
     	if(isOpen==true)
     	{
-    		wavelength = 4/harmonic * length;
+    		wavelength = 2/harmonic * length;
     	}
     	else
     	{
-    		wavelength = 2/harmonic * length;
+    		wavelength = 4/harmonic * length;
     	}
     }
 
 
     public void setOpen(boolean isOpen) {this.isOpen=isOpen;}
 
-    public void drawWave(Graphics g,int x,int y,int scale,double periods)
+    public void drawCosWave(Graphics g,int x,int y,int scale,double periods,boolean mirror)
     {
         //resolution is how close each step is to the other the higher the resolution the higher the step.
         //resolution is not dependent on period
         // as you go too high in resolution you get weird artifacts. 64 doesnt give much artifacting
         //wavelength= wavelength/100.0;
+		int alternator;
+		if (mirror==true)
+		{
+			alternator=-1;
+		}
+		else
+		{
+			alternator=1;
+		}
 		System.out.println(wavelength);
         double resolution =64;
         double step = (2*Math.PI)/resolution;
@@ -97,9 +106,9 @@ public class Waves extends UpdatableComponent
        for (double i=0;i<=maxSteps;i=i+step)
        {
            functionX=i;
-           functionY=Math.cos((1/wavelength)*(i));
+           functionY=alternator*Math.cos((1/wavelength)*(i));
            nxtFunctionX=i+step;
-           nxtFunctionY=Math.cos((1/wavelength)*(i+step));
+           nxtFunctionY=alternator*Math.cos((1/wavelength)*(i+step));
            currentX= initialX+(int)(functionX *scale);
            currentY= initialY+(int)(functionY *scale);
            nxtX= initialX+(int)(nxtFunctionX *scale);
@@ -109,44 +118,56 @@ public class Waves extends UpdatableComponent
            g.drawLine(currentX,currentY,nxtX,nxtY);
        }
 
-
-
     }
 
-
-    public void drawTrajectory(Graphics g,int initialX,int initialY,double velocity,double angle)
-    {
-        double functionX;
-        double functionY;
-        double xVelo = velocity*Math.cos(Math.toRadians(angle));
-        double yVelo = velocity*Math.sin(Math.toRadians(angle));
-        double range = (Math.pow(velocity,2) * Math.sin(2*Math.toRadians(angle)))/(9.81);
-        //the denominator of the step function is the number of points on the trajectory
-		double step = range/30;
-		//scale is used as a multiplier. so if you have a scale of X, that means X pixels = 1 meter
-		int scale = 10;
-        int currentX;
-        int currentY;
-
-        for (double i=0;i<=range;i=i+step)
-        {
-            functionX = i;
-            /*(i/xVelo)^2 is the time squared, there for when you sub that into the 2nd
-            *kinematic you end ump with yPosition as a function of xPosition
-            * therefore you can loop through all the xPositions and calculate there yPositions
-            * */
-
-            functionY = (-4.9*Math.pow((i/xVelo),2))+(Math.tan(Math.toRadians(angle))*i);
-            currentX =(int)(functionX*10);
-            currentY = (int)(functionY*10);
-
-
-            g.fillOval(currentX+initialX,initialY-currentY,4,4);
-        }
-
+	public void drawSinWave(Graphics g,int x,int y,int scale,double periods,boolean mirror)
+	{
+		//resolution is how close each step is to the other the higher the resolution the higher the step.
+		//resolution is not dependent on period
+		// as you go too high in resolution you get weird artifacts. 64 doesnt give much artifacting
+		//wavelength= wavelength/100.0;
+		int alternator;
+		if (mirror==true)
+		{
+			alternator=-1;
+		}
+		else
+		{
+			alternator=1;
+		}
+		System.out.println(wavelength);
+		double resolution =64;
+		double step = (2*Math.PI)/resolution;
+		double maxSteps=(2*Math.PI)*periods;
+		double functionX;
+		double functionY;
+		double nxtFunctionX;
+		double nxtFunctionY;
+		int currentX;
+		int currentY;
+		int nxtX;
+		int nxtY;
+		int initialX=x;
+		int initialY=y;
 
 
-    }
+
+		for (double i=0;i<=maxSteps;i=i+step)
+		{
+			functionX=i;
+			functionY=alternator*Math.sin((1/wavelength)*(i));
+			nxtFunctionX=i+step;
+			nxtFunctionY=alternator*Math.sin((1/wavelength)*(i+step));
+			currentX= initialX+(int)(functionX *scale);
+			currentY= initialY+(int)(functionY *scale);
+			nxtX= initialX+(int)(nxtFunctionX *scale);
+			nxtY= initialY+(int)(nxtFunctionY *scale);
+
+
+			g.drawLine(currentX,currentY,nxtX,nxtY);
+		}
+
+	}
 
 	public void paint(Graphics g) 
     {
@@ -166,12 +187,18 @@ public class Waves extends UpdatableComponent
         if(isOpen)
         {
             g2d.drawImage(openImage, getWidth()/2-200,200-60, 400,200, this);
+            calculate();
+			drawCosWave(g,0,getHeight()/2,50,1,false);
+			drawCosWave(g,0,getHeight()/2,50,1,true);
         }
         else
         {
             g2d.drawImage(closedImage, getWidth()/2-200,200-60, 400,200, this);
+			calculate();
+			drawSinWave(g,0,getHeight()/2,50,1,false);
+			drawSinWave(g,0,getHeight()/2,50,1,true);
         }
-		drawWave(g,0,getHeight()/2,50,1);
+
 
 
         //drawTrajectory(g,0,getHeight()/2,20,85);
