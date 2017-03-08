@@ -30,19 +30,19 @@ public class WavesPanel extends PhysicsPanel
 //	private double temperature;
 	
 
-    public WavesPanel(double wavelength, double length)
+    public WavesPanel(double harmonic, double length)
     {
         super();
           Eq= new PhysicsEquations();
-        init(wavelength,length);
+        init(harmonic,length);
     }
 
 
-    public void init(double wavelength, double length)
+    public void init(double harmonic, double length)
 
     {
 		isOpen=false;
-        wavesComponent = new Waves(wavelength);
+        wavesComponent = new Waves(harmonic);
         //defines panels
 		WavesPanel = new RunnablePanel(wavesComponent);
 		/*
@@ -83,7 +83,7 @@ public class WavesPanel extends PhysicsPanel
 
         wavelenghtField = new JFormattedTextField(thetaFormat);
 
-        wavelenghtField.setValue(wavelength);
+        wavelenghtField.setValue(harmonic);
 
         wavelenghtField.setColumns(4);
 
@@ -120,6 +120,7 @@ public class WavesPanel extends PhysicsPanel
         Thread wavesThread = new Thread(WavesPanel);
 
         wavesThread.start();
+		WavesPanel.setRunning(false);
 
         this.setLayout(new BorderLayout());
         this.add(WavesPanel,BorderLayout.CENTER);
@@ -141,13 +142,13 @@ public class WavesPanel extends PhysicsPanel
             {
 				String text = wavelenghtField.getText();
 				
-				double wavelength = Double.parseDouble(text);
-				WavesPanel.setRunning(true);
-				wavesComponent.setWavelength(wavelength);
-				//wavesComponent.calculate();
+				double harmonic = Double.parseDouble(text);
+				//WavesPanel.setRunning(true);
+				wavesComponent.setHarmonic(harmonic);
+				wavesComponent.calculate();
 				wavesComponent.repaint();
 				
-				System.out.print(wavelength);
+				System.out.print(harmonic);
 				
 				
 				System.out.println("Calc clicked");

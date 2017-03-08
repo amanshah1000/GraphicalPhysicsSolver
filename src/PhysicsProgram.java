@@ -50,7 +50,7 @@ public class PhysicsProgram extends JFrame
         Eq = new PhysicsEquations();
         pendulumPanel = new PendulumPanel(90,100);
         speedOfSoundPanel = new SpeedOfSoundPanel(100);
-        wavesPanel = new WavesPanel(100,100);
+        wavesPanel = new WavesPanel(1,100);
         springPanel = new SpringPanel(1,100,50);
         socPanel = new SonofCousinPanel(45,20);
 		

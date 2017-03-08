@@ -1,4 +1,3 @@
-//import com.sun.xml.internal.ws.policy.privateutil.PolicyUtils;
 
 import java.awt.*;
 import java.io.File;
@@ -21,14 +20,16 @@ public class Waves extends UpdatableComponent
     private Image openImage;
     private boolean isOpen;
     private double harmonic;
-    public Waves(double wavelength)
+    public Waves(double harmonic)
     {
 
         super();
         this.velocity=velocity;
         frequency=1;
-        this.wavelength=wavelength;
+        length=1;
+        this.harmonic=harmonic;
         isOpen=false;
+        calculate();
         try
         {
             closedImage = ImageIO.read(new File("Tube Closed.png"));
@@ -50,32 +51,34 @@ public class Waves extends UpdatableComponent
     public void update(){
     	repaint();
     }
-    public void setWavelength(double wavelength){
-        this.wavelength= wavelength;
+    public void setHarmonic(double harmonic){
+        this.harmonic= harmonic;
     }
-    
+
     public void calculate()
     {
-    	if(isOpen)
+    	System.out.println(isOpen);
+    	if(isOpen==true)
     	{
-    		wavelength = harmonic/4 * length;
+    		wavelength = 4/harmonic * length;
     	}
     	else
     	{
-    		wavelength = harmonic/2 * length;
+    		wavelength = 2/harmonic * length;
     	}
     }
-    
-    
-    public void setOpen(boolean isOPen) {this.isOpen=isOPen;}
 
-    public void drawWave(Graphics g,int x,int y,int scale,double periods,double wavelength)
+
+    public void setOpen(boolean isOpen) {this.isOpen=isOpen;}
+
+    public void drawWave(Graphics g,int x,int y,int scale,double periods)
     {
         //resolution is how close each step is to the other the higher the resolution the higher the step.
         //resolution is not dependent on period
         // as you go too high in resolution you get weird artifacts. 64 doesnt give much artifacting
-        wavelength= wavelength/100.0;
-        double resolution =(wavelength/2)*64;
+        //wavelength= wavelength/100.0;
+		System.out.println(wavelength);
+        double resolution =64;
         double step = (2*Math.PI)/resolution;
         double maxSteps=(2*Math.PI)*periods;
         double functionX;
@@ -94,9 +97,9 @@ public class Waves extends UpdatableComponent
        for (double i=0;i<=maxSteps;i=i+step)
        {
            functionX=i;
-           functionY=Math.sin(wavelength*(i));
+           functionY=Math.cos((1/wavelength)*(i));
            nxtFunctionX=i+step;
-           nxtFunctionY=Math.sin(wavelength*(i+step));
+           nxtFunctionY=Math.cos((1/wavelength)*(i+step));
            currentX= initialX+(int)(functionX *scale);
            currentY= initialY+(int)(functionY *scale);
            nxtX= initialX+(int)(nxtFunctionX *scale);
@@ -159,16 +162,16 @@ public class Waves extends UpdatableComponent
         g.drawString( "Closed Columns : " + " Length is " + length + " m when Wavelength is " + wavelength + " m/s", getWidth()/2, getHeight()/2);
 
         //g.drawString("Wavelength is " + wavelength + "when Frequency is:" + String.valueOf(wavelength) + "m/s", getWidth()/2, getHeight()/2);
-        drawWave(g,0,getHeight()/2,50,1,wavelength);
+
         if(isOpen)
         {
-            g2d.drawImage(openImage, 300,200-60, 200,200, this);
+            g2d.drawImage(openImage, getWidth()/2-200,200-60, 400,200, this);
         }
         else
         {
-            g2d.drawImage(closedImage, 300,200-60, 200,200, this);
+            g2d.drawImage(closedImage, getWidth()/2-200,200-60, 400,200, this);
         }
-
+		drawWave(g,0,getHeight()/2,50,1);
 
 
         //drawTrajectory(g,0,getHeight()/2,20,85);
@@ -198,4 +201,3 @@ public class Waves extends UpdatableComponent
           
           
           
-
