@@ -199,23 +199,27 @@ public class Waves extends UpdatableComponent
 		//g.setColor(Color.RED);
         
 
-        g.drawString( "Closed Columns : " + " Length is " + length + " m when Wavelength is " + wavelength + " m/s", getWidth()/2, getHeight()/2);
+
 
         //g.drawString("Wavelength is " + wavelength + "when Frequency is:" + String.valueOf(wavelength) + "m/s", getWidth()/2, getHeight()/2);
 
         if(isOpen)
         {
-			g.setColor(Color.RED);
+
             g2d.drawImage(openImage, getWidth()/2-200,200-60, 400,200, this);
             calculate();
+			g.drawString( "Open Tube : " + "Wavelength is "+Math.round(wavelength*1000.0)/1000.0+"m in a 1.0m long open tube playing harmonic " +harmonic, getWidth()/2-250, getHeight()/4);
+			g.setColor(Color.RED);
 			drawCosWave(g,getWidth()/2-200,getHeight()/2-6,63,1,false);
 			drawCosWave(g,getWidth()/2-200,getHeight()/2-6,63,1,true);
         }
         else
         {
-        	g.setColor(Color.RED);
+
             g2d.drawImage(closedImage, getWidth()/2-200,200-60, 400,200, this);
 			calculate();
+			g.drawString( "Closed Tube : " + "Wavelength is "+Math.round(wavelength*1000.0)/1000.0+"m in a 1.0m long tube closed at one end playing harmonic " +harmonic, getWidth()/2-250, getHeight()/4);
+			g.setColor(Color.RED);
 			drawSinWave(g,getWidth()/2-200+27,getHeight()/2-6,59,1,false);
 			drawSinWave(g,getWidth()/2-200+27,getHeight()/2-6,59,1,true);
         }

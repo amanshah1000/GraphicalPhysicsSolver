@@ -127,6 +127,24 @@ public class WavesPanel extends PhysicsPanel
 
 
     }
+    public double formatHarmonic()
+	{
+		String text = wavelenghtField.getText();
+
+		double harmonic = Double.parseDouble(text);
+		//WavesPanel.setRunning(true);
+		harmonic=Math.round(harmonic);
+
+		if(harmonic %2 ==0 && isOpen==false)
+		{
+			harmonic = harmonic-1;
+			wavelenghtField.setValue(harmonic);
+
+		}
+		wavelenghtField.setValue(harmonic);
+		return harmonic;
+	}
+
     
     public class ActionPanel extends JPanel implements ActionListener, PropertyChangeListener
     {
@@ -135,15 +153,12 @@ public class WavesPanel extends PhysicsPanel
         @Override
         public void actionPerformed(ActionEvent event)
         {
-
+			double harmonic = formatHarmonic();
             Object source = event.getSource();
 
             if (source == calc)
             {
-				String text = wavelenghtField.getText();
-				
-				double harmonic = Double.parseDouble(text);
-				//WavesPanel.setRunning(true);
+
 				wavesComponent.setHarmonic(harmonic);
 				//wavesComponent.calculate();
 				wavesComponent.repaint();
@@ -160,6 +175,8 @@ public class WavesPanel extends PhysicsPanel
 				wavesComponent.setOpen(isOpen);
 				//TODO set is open in waves
 				System.out.println("Open is: "+isOpen);
+				harmonic = formatHarmonic();
+				wavesComponent.setHarmonic(harmonic);
 				wavesComponent.repaint();
 			}
 		}
