@@ -78,6 +78,7 @@ public class Waves extends UpdatableComponent
         // as you go too high in resolution you get weird artifacts. 64 doesnt give much artifacting
         //wavelength= wavelength/100.0;
 		int alternator;
+
 		if (mirror==true)
 		{
 			alternator=-1;
@@ -87,7 +88,7 @@ public class Waves extends UpdatableComponent
 			alternator=1;
 		}
 		System.out.println(wavelength);
-        double resolution =64;
+		double resolution = (harmonic/2) *32;
         double step = (2*Math.PI)/resolution;
         double maxSteps=(2*Math.PI)*periods;
         double functionX;
@@ -136,7 +137,7 @@ public class Waves extends UpdatableComponent
 			alternator=1;
 		}
 		System.out.println(wavelength);
-		double resolution =64*(1/wavelength);
+		double resolution =(harmonic/2.5)*64;
 		double step = (2*Math.PI)/resolution;
 		double maxSteps=(2*Math.PI)*periods;
 		double functionX;
