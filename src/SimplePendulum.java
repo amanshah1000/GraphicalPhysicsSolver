@@ -139,6 +139,7 @@ public class SimplePendulum extends UpdatableComponent
 		g.drawLine(anchorX, anchorY, ballX, ballY);
 		g.fillOval(anchorX - 3, anchorY - 4, 7, 7);
 		g.fillOval(ballX - 7, ballY - 7, 14, 14);
+		//System.out.println(getWidth());
 
 		//sets the old transform so that you can unrotate the screen
         AffineTransform old = g2d.getTransform();
@@ -157,7 +158,7 @@ public class SimplePendulum extends UpdatableComponent
         g2d.drawString("Time Elapsed(s) = "+Math.round(totalTime*100000)/100000.0,getWidth()/8,getHeight()/4-getHeight()/16+getHeight()/16);
         g2d.drawString("Period (s) = "+Math.round(period*100000)/100000.0,getWidth()/8,getHeight()/4-getHeight()/16+getHeight()/8);
         g2d.drawString("Theta (deg) = "+Math.round(Math.toDegrees(theta)*100)/100.0,getWidth()/8,getHeight()/4-getHeight()/16-getHeight()/8);
-        g2d.drawString("Theta (deg) = "+Math.toDegrees(theta),getWidth()/8,getHeight()/2);
+        //g2d.drawString("Theta (deg) = "+Math.toDegrees(theta),getWidth()/8,getHeight()/2);
     }
 	
 	public void update()
@@ -177,7 +178,7 @@ public class SimplePendulum extends UpdatableComponent
             //alpha = -9.81 * Math.sin(theta);
             womega += alpha * deltaTime;
             theta += womega * deltaTime;
-            //totalTime += deltaTime;
+            totalTime += deltaTime;
             //period=(2*Math.PI)*Math.pow((meterLength/(9.81*Math.sin(theta))),0.5);
             repaint();
 	}

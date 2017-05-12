@@ -32,7 +32,7 @@ public class ElasticPanel extends PhysicsPanel {
     }
 
     public void init(double mass1, double mass2, double velocity1, double velocity2) {
-        elastic = new ElasticCollision(ElasticPanel);
+        elastic = new ElasticCollision(ElasticPanel,mass1,mass2,velocity1,velocity2);
 
         ElasticPanel = new RunnablePanel(elastic);
 
@@ -49,19 +49,19 @@ public class ElasticPanel extends PhysicsPanel {
         //defines text fields
 
         inputRadius1 = new JFormattedTextField(thetaFormat);
-        inputRadius1.setValue(0);
+        inputRadius1.setValue(mass1);
         inputRadius1.setColumns(4);
 
         inputRadius2 = new JFormattedTextField(thetaFormat);
-        inputRadius2.setValue(0);
+        inputRadius2.setValue(mass2);
         inputRadius2.setColumns(4);
 
         inputVelocity1 = new JFormattedTextField(thetaFormat);
-        inputVelocity1.setValue(0);
+        inputVelocity1.setValue(velocity1);
         inputVelocity1.setColumns(4);
 
         inputVelocity2 = new JFormattedTextField(thetaFormat);
-        inputVelocity2.setValue(0);
+        inputVelocity2.setValue(velocity2);
         inputVelocity2.setColumns(4);
 
 
@@ -98,10 +98,11 @@ public class ElasticPanel extends PhysicsPanel {
 
         Thread elasticThread = new Thread(ElasticPanel);
 
-        elasticThread.start();
+
 
         ElasticPanel.add(elastic);
-
+        ElasticPanel.setRunning(true);
+        elasticThread.start();
         this.setLayout(new BorderLayout());
         this.add(ElasticPanel, BorderLayout.CENTER);
     }

@@ -80,7 +80,7 @@ public class PendulumPanel extends PhysicsPanel
         startButton = new JButton("Start");
         setButton = new  JButton("Set");
         rotatesButton = new JButton("Rotates?");
-        singlePeriodButton = new JButton("Single Period?");
+        //singlePeriodButton = new JButton("Single Period?");
 
         //defines text fields
         lengthField = new JFormattedTextField(thetaFormat);
@@ -111,7 +111,7 @@ public class PendulumPanel extends PhysicsPanel
 
         //add buttons to the east panel
         eastPanel.add(rotatesButton);
-        eastPanel.add(singlePeriodButton);
+        //eastPanel.add(singlePeriodButton);
 
 
         //add actionliseners to buttons on a clickable panel
@@ -121,7 +121,7 @@ public class PendulumPanel extends PhysicsPanel
         startButton.addActionListener(lowerPanel);
         setButton.addActionListener(lowerPanel);
         rotatesButton.addActionListener(lowerPanel);
-        singlePeriodButton.addActionListener(lowerPanel);
+        //singlePeriodButton.addActionListener(lowerPanel);
 
         // inits other variables
         doesRotate=true;
