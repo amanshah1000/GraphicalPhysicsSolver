@@ -19,6 +19,7 @@ public class PhysicsProgram extends JFrame
     private SpringPanel springPanel;
     private SonOfCousinPanel socPanel;
     private PlanetsPanel planetsPanel;
+    private ElasticPanel elasticPanel;
     private int screenWidth;
     private int screenHeight;
     private PhysicsEquations Eq;
@@ -33,7 +34,7 @@ public class PhysicsProgram extends JFrame
         tabbedPane.addTab("SpeedOfSound", speedOfSoundPanel);
         tabbedPane.addTab("Waves",wavesPanel);
         tabbedPane.addTab("Projectile",socPanel);
-        tabbedPane.addTab("Planets",planetsPanel);
+        tabbedPane.addTab("Elastic Collision",elasticPanel);
 
         pane.add(tabbedPane, BorderLayout.CENTER);
     }
@@ -56,7 +57,7 @@ public class PhysicsProgram extends JFrame
         springPanel = new SpringPanel(1,100,50);
         socPanel = new SonOfCousinPanel(45,20);
         planetsPanel = new PlanetsPanel(0,0,0);
-
+        elasticPanel = new ElasticPanel(0,0,0,0);
         setSize(screenWidth,screenHeight);
 
         //starts the Jframe window, and sets title
